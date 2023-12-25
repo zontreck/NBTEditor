@@ -12,10 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      routes: {
-        "/": (context) => const Editor(),
-        "/select_file": (context) => const FileSelectionScreen()
-      },
+      routes: {"/": (context) => const Editor()},
     );
   }
 }

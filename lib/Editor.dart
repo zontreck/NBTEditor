@@ -102,31 +102,3 @@ class EditorState extends State<Editor> {
     );
   }
 }
-
-class FileSelectionScreen extends StatelessWidget {
-  const FileSelectionScreen({super.key});
-
-  Future<void> openFilePicker(BuildContext context) async {
-    try {} catch (e) {
-      // Handle errors
-      print('Error selecting file: $e');
-    }
-
-    Navigator.pop(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('File Selection'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => openFilePicker(context),
-          child: const Text('Select File'),
-        ),
-      ),
-    );
-  }
-}
