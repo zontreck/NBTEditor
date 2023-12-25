@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
@@ -32,87 +31,99 @@ abstract class Tag {
   Node getNode(String path);
 
   ByteTag asByte() {
-    if (this is ByteTag)
+    if (this is ByteTag) {
       return this as ByteTag;
-    else
+    } else {
       return ByteTag();
+    }
   }
 
   ShortTag asShort() {
-    if (this is ShortTag)
+    if (this is ShortTag) {
       return this as ShortTag;
-    else
+    } else {
       return ShortTag();
+    }
   }
 
   IntTag asInt() {
-    if (this is IntTag)
+    if (this is IntTag) {
       return this as IntTag;
-    else
+    } else {
       return IntTag();
+    }
   }
 
   LongTag asLong() {
-    if (this is LongTag)
+    if (this is LongTag) {
       return this as LongTag;
-    else
+    } else {
       return LongTag();
+    }
   }
 
   FloatTag asFloat() {
-    if (this is FloatTag)
+    if (this is FloatTag) {
       return this as FloatTag;
-    else
+    } else {
       return FloatTag();
+    }
   }
 
   DoubleTag asDouble() {
-    if (this is DoubleTag)
+    if (this is DoubleTag) {
       return this as DoubleTag;
-    else
+    } else {
       return DoubleTag();
+    }
   }
 
   ByteArrayTag asByteArray() {
-    if (this is ByteArrayTag)
+    if (this is ByteArrayTag) {
       return this as ByteArrayTag;
-    else
+    } else {
       return ByteArrayTag();
+    }
   }
 
   StringTag asString() {
-    if (this is StringTag)
+    if (this is StringTag) {
       return this as StringTag;
-    else
+    } else {
       return StringTag();
+    }
   }
 
   ListTag asListTag() {
-    if (this is ListTag)
+    if (this is ListTag) {
       return this as ListTag;
-    else
+    } else {
       return ListTag();
+    }
   }
 
   CompoundTag asCompoundTag() {
-    if (this is CompoundTag)
+    if (this is CompoundTag) {
       return this as CompoundTag;
-    else
+    } else {
       return CompoundTag();
+    }
   }
 
   IntArrayTag asIntArrayTag() {
-    if (this is IntArrayTag)
+    if (this is IntArrayTag) {
       return this as IntArrayTag;
-    else
+    } else {
       return IntArrayTag();
+    }
   }
 
   LongArrayTag asLongArrayTag() {
-    if (this is LongArrayTag)
+    if (this is LongArrayTag) {
       return this as LongArrayTag;
-    else
+    } else {
       return LongArrayTag();
+    }
   }
 
   Tag withNick(String name) {
@@ -195,13 +206,13 @@ abstract class Tag {
       default:
         {
           print(
-              "Unknown tag: ${tagType}, aborting read at ${layer.currentPosition - 1} bytes");
+              "Unknown tag: $tagType, aborting read at ${layer.currentPosition - 1} bytes");
 
           throw Exception("Unknown tag, could not deserialize");
         }
     }
 
-    print("Read ${tagType}");
+    print("Read $tagType");
 
     if (!isList) tag.readHeader(layer);
 

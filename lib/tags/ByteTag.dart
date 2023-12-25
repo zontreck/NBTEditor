@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_treeview/src/models/node.dart';
 import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
@@ -10,7 +9,7 @@ class ByteTag extends Tag {
 
   @override
   Node getNode(String path) {
-    return Node(key: path, label: "TAG_Byte ${Name}", data: this);
+    return Node(key: path, label: "TAG_Byte $Name", data: this);
   }
 
   @override
@@ -20,14 +19,14 @@ class ByteTag extends Tag {
 
   @override
   void readValue(ByteLayer layer) {
-    this._value = layer.readByte();
+    _value = layer.readByte();
   }
 
   @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_Byte (${Name})"),
-      subtitle: Text("${_value}"),
+      title: Text("TAG_Byte ($Name)"),
+      subtitle: Text("$_value"),
     );
   }
 
@@ -43,7 +42,7 @@ class ByteTag extends Tag {
 
   @override
   void writeValue(ByteLayer layer) {
-    layer.writeByte(this._value);
+    layer.writeByte(_value);
   }
 
   @override

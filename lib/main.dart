@@ -13,8 +13,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       routes: {
-        "/": (context) => Editor(),
-        "/select_file": (context) => FileSelectionScreen()
+        "/": (context) => const Editor(),
+        "/select_file": (context) => const FileSelectionScreen()
       },
     );
   }

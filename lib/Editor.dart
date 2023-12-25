@@ -7,7 +7,7 @@ import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
 class Editor extends StatefulWidget {
-  Editor({super.key});
+  const Editor({super.key});
 
   @override
   EditorState createState() => EditorState();
@@ -22,8 +22,9 @@ class EditorState extends State<Editor> {
   String appendCompressed() {
     if (compressed) {
       return " - Compressed";
-    } else
+    } else {
       return "";
+    }
   }
 
   @override
@@ -38,7 +39,7 @@ class EditorState extends State<Editor> {
       drawer: Drawer(
         backgroundColor: Constants.DRAWER_COLOR,
         child: Column(children: [
-          DrawerHeader(
+          const DrawerHeader(
               child: Column(
             children: [
               Text("Named Binary Tag Editor"),
@@ -46,9 +47,9 @@ class EditorState extends State<Editor> {
             ],
           )),
           ListTile(
-            title: Text("N E W"),
-            subtitle: Text("Create a new NBT Document"),
-            leading: Icon(Icons.add),
+            title: const Text("N E W"),
+            subtitle: const Text("Create a new NBT Document"),
+            leading: const Icon(Icons.add),
             onTap: () {
               setState(() {
                 nodes.clear();
@@ -60,9 +61,9 @@ class EditorState extends State<Editor> {
             },
           ),
           ListTile(
-            title: Text("O P E N"),
-            leading: Icon(Icons.folder),
-            subtitle: Text("Open an existing NBT Document for editing"),
+            title: const Text("O P E N"),
+            leading: const Icon(Icons.folder),
+            subtitle: const Text("Open an existing NBT Document for editing"),
             onTap: () async {
               FilePickerResult? result = await FilePicker.platform.pickFiles();
               String? filePath;
@@ -103,6 +104,8 @@ class EditorState extends State<Editor> {
 }
 
 class FileSelectionScreen extends StatelessWidget {
+  const FileSelectionScreen({super.key});
+
   Future<void> openFilePicker(BuildContext context) async {
     try {} catch (e) {
       // Handle errors
@@ -116,12 +119,12 @@ class FileSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('File Selection'),
+        title: const Text('File Selection'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () => openFilePicker(context),
-          child: Text('Select File'),
+          child: const Text('Select File'),
         ),
       ),
     );

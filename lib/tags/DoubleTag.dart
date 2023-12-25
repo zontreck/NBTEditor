@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_treeview/src/models/node.dart';
 import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
@@ -26,8 +25,8 @@ class DoubleTag extends Tag {
   @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_Double (${Name})"),
-      subtitle: Text("${_value}"),
+      title: Text("TAG_Double ($Name)"),
+      subtitle: Text("$_value"),
     );
   }
 

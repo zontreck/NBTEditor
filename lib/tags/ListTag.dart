@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_treeview/src/models/node.dart';
 import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
 import 'package:nbteditor/tags/TagType.dart';
 
 class ListTag extends Tag {
-  List<Tag> _value = [];
+  final List<Tag> _value = [];
 
   @override
   Node getNode(String path) {
@@ -27,7 +26,7 @@ class ListTag extends Tag {
   }
 
   bool add(Tag tag) {
-    if (_value.length > 0) {
+    if (_value.isNotEmpty) {
       if (tag.getTagType() == _value[0].getTagType()) {
         _value.add(tag);
 
@@ -56,7 +55,7 @@ class ListTag extends Tag {
   @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_List (${Name}) (${getListTagType()})"),
+      title: Text("TAG_List ($Name) (${getListTagType()})"),
       subtitle: Text("${_value.length} entries"),
     );
   }
@@ -72,15 +71,16 @@ class ListTag extends Tag {
   }
 
   TagType getListTagType() {
-    if (_value.length > 0) {
+    if (_value.isNotEmpty) {
       return TagType.End;
-    } else
+    } else {
       return _value[0].getTagType();
+    }
   }
 
   @override
   void writeValue(ByteLayer layer) {
-    if (_value.length > 0) {
+    if (_value.isNotEmpty) {
       _value[0].writeTagType(layer);
     } else {
       layer.writeByte(TagType.End.toByte());

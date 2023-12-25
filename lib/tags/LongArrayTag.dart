@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_treeview/src/models/node.dart';
 import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
 import 'package:nbteditor/tags/TagType.dart';
 
 class LongArrayTag extends Tag {
-  List<int> _value = [];
+  final List<int> _value = [];
 
   @override
   Node getNode(String path) {
     List<Node> entries = [];
     int count = 0;
     for (var element in _value) {
-      entries.add(Node(key: "$path/${count}", label: "${element}"));
+      entries.add(Node(key: "$path/$count", label: "$element"));
       count++;
     }
 
@@ -36,7 +35,7 @@ class LongArrayTag extends Tag {
   @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_LongArray (${Name})"),
+      title: Text("TAG_LongArray ($Name)"),
       subtitle: Text("${_value.length} entries"),
     );
   }

@@ -6,8 +6,8 @@ import 'package:nbteditor/tags/TagType.dart';
 import 'package:uuid/v4.dart';
 
 class CompoundTag extends Tag {
-  UuidV4 v4 = UuidV4();
-  Map<String, Tag> _children = {};
+  UuidV4 v4 = const UuidV4();
+  final Map<String, Tag> _children = {};
 
   CompoundTag() {
     setKey(v4.generate());
@@ -18,7 +18,7 @@ class CompoundTag extends Tag {
   @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_Compound (${Name})"),
+      title: Text("TAG_Compound ($Name)"),
       subtitle:
           Text("${_children.length} tag${_children.length > 1 ? "s" : ""}"),
     );
@@ -29,7 +29,7 @@ class CompoundTag extends Tag {
     List<Node> childTags = [];
 
     for (var element in _children.entries) {
-      childTags.add(element.value.getNode(path + "/${element.key}"));
+      childTags.add(element.value.getNode("$path/${element.key}"));
     }
     Node me = Node(key: path, label: Name, data: this, children: childTags);
     return me;
