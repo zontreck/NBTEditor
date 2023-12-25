@@ -1,5 +1,5 @@
 name: nbteditor
-description: A new Flutter project.
+description: A Minecraft NBT Editor written in Flutter
 publish_to: 'none'
 version: 0.1.0
 
