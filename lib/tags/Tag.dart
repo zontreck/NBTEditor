@@ -13,7 +13,9 @@ import 'package:libac_dart/nbt/impl/LongArrayTag.dart';
 import 'package:libac_dart/nbt/impl/LongTag.dart';
 import 'package:libac_dart/nbt/impl/ShortTag.dart';
 import 'package:libac_dart/nbt/impl/StringTag.dart';
+import 'package:nbteditor/Editor.dart';
 import 'package:nbteditor/pages/AddPage.dart';
+import 'package:nbteditor/pages/RenamePrompt.dart';
 import 'package:nbteditor/tags/ByteArrayTag.dart';
 import 'package:nbteditor/tags/ByteTag.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
@@ -153,12 +155,63 @@ class TagExt {
         if (canAddElements)
           ElevatedButton(
               onPressed: () async {
+                bool allowAllTagTypes = true;
+                bool isArray = false;
+                List<TagType> allowedTypes = [];
+                if (tag is CompoundTag) allowAllTagTypes = true;
+                if (tag is ListTag) {
+                  ListTag lst = tag as ListTag;
+                  if (lst.size() == 0)
+                    allowAllTagTypes = true;
+                  else {
+                    allowAllTagTypes = false;
+                    allowedTypes = [lst.get(0).getTagType()];
+                  }
+                }
+                if (tag is ByteArrayTag) {
+                  allowAllTagTypes = false;
+                  isArray = true;
+                  allowedTypes = [TagType.Byte];
+                }
+
+                if (tag is IntArrayTag) {
+                  allowAllTagTypes = false;
+                  isArray = true;
+                  allowedTypes = [TagType.Int];
+                }
+
+                if (tag is LongArrayTag) {
+                  allowAllTagTypes = false;
+                  isArray = true;
+                  allowedTypes = [TagType.Long];
+                }
+
                 var response = await Navigator.pushNamed(ctx, "/add",
-                    arguments: AddElementArgs(tag: tag));
+                    arguments: AddElementArgs(
+                        tag: tag,
+                        allowAllTagTypes: allowAllTagTypes,
+                        isArray: isArray,
+                        allowedTagTypes: allowedTypes));
               },
               child: Icon(Icons.add)),
         if (isNamed)
-          ElevatedButton(onPressed: () {}, child: Text("R E N A M E")),
+          ElevatedButton(
+              onPressed: () async {
+                var response = await showDialog(
+                    context: ctx,
+                    routeSettings: RouteSettings(arguments: tag.getKey()),
+                    builder: (B) {
+                      return RenamePrompt();
+                    });
+
+                if (response is String) {
+                  tag.setKey(response as String);
+
+                  EditorState state = EditorState();
+                  state.update();
+                }
+              },
+              child: Text("R E N A M E")),
         if (editableValue)
           ElevatedButton(onPressed: () {}, child: Text("E D I T"))
       ],

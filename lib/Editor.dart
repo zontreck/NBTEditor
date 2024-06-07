@@ -19,7 +19,21 @@ class EditorState extends State<Editor> {
   List<Node> nodes = [CompoundTag().getNode("/")];
   bool compressed = false;
 
+  static EditorState? _inst;
+  EditorState._() {
+    _inst = this;
+  }
   late TreeViewController controller;
+  factory EditorState() {
+    if (_inst == null)
+      return EditorState._();
+    else
+      return _inst!;
+  }
+
+  void update() {
+    setState(() {});
+  }
 
   String appendCompressed() {
     if (compressed) {

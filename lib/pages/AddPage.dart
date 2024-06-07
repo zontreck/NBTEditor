@@ -34,5 +34,14 @@ class AddState extends State<AddPage> {
 
 class AddElementArgs {
   Tag tag;
-  AddElementArgs({required this.tag});
+  bool allowAllTagTypes;
+  bool isArray;
+
+  List<TagType> allowedTagTypes;
+
+  AddElementArgs(
+      {required this.tag,
+      required this.allowAllTagTypes,
+      required this.isArray,
+      this.allowedTagTypes = const []});
 }
