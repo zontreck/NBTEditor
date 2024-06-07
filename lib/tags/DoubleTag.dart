@@ -1,52 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/src/models/node.dart';
-import 'package:nbteditor/tags/NbtIo.dart';
+import 'package:libac_dart/nbt/impl/DoubleTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
-import 'package:nbteditor/tags/TagType.dart';
 
-class DoubleTag extends Tag {
-  double _value = 0.0;
-
-  @override
+extension DoubleTagExt on DoubleTag {
   Node getNode(String path) {
-    return Node(key: path, label: "", data: this);
+    return Node(key: path, label: "TAG_Double ${getKey()}", data: this);
   }
 
-  @override
-  void readHeader(ByteLayer layer) {
-    setName(layer.readTagName());
-  }
-
-  @override
-  void readValue(ByteLayer layer) {
-    _value = layer.readDouble();
-  }
-
-  @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_Double ($Name)"),
-      subtitle: Text("$_value"),
+      title: Text("TAG_Double (${getKey()})"),
+      subtitle: TagExt.getElementDescriptor(
+          "${value}", false, true, canBeNamed(this)),
     );
-  }
-
-  @override
-  void writeHeader(ByteLayer layer) {
-    layer.writeTagName(Name);
-  }
-
-  @override
-  void writeTagType(ByteLayer layer) {
-    layer.writeByte(TagType.Double.toByte());
-  }
-
-  @override
-  void writeValue(ByteLayer layer) {
-    layer.writeDouble(_value);
-  }
-
-  @override
-  TagType getTagType() {
-    return TagType.Double;
   }
 }

@@ -1,52 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/src/models/node.dart';
-import 'package:nbteditor/tags/NbtIo.dart';
+import 'package:libac_dart/nbt/impl/ByteTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
-import 'package:nbteditor/tags/TagType.dart';
 
-class ByteTag extends Tag {
-  int _value = 0;
-
-  @override
+extension ByteTagExt on ByteTag {
   Node getNode(String path) {
-    return Node(key: path, label: "TAG_Byte $Name", data: this);
+    return Node(key: path, label: "TAG_Byte ${getKey()}", data: this);
   }
 
-  @override
-  void readHeader(ByteLayer layer) {
-    setName(layer.readTagName());
-  }
-
-  @override
-  void readValue(ByteLayer layer) {
-    _value = layer.readByte();
-  }
-
-  @override
   Widget render() {
     return ListTile(
-      title: Text("TAG_Byte ($Name)"),
-      subtitle: Text("$_value"),
+      title: Text("TAG_Byte (${getKey()})"),
+      subtitle: TagExt.getElementDescriptor(
+          "${value}", false, true, canBeNamed(this)),
     );
-  }
-
-  @override
-  void writeHeader(ByteLayer layer) {
-    layer.writeTagName(Name);
-  }
-
-  @override
-  void writeTagType(ByteLayer layer) {
-    layer.writeByte(TagType.Byte.toByte());
-  }
-
-  @override
-  void writeValue(ByteLayer layer) {
-    layer.writeByte(_value);
-  }
-
-  @override
-  TagType getTagType() {
-    return TagType.Byte;
   }
 }

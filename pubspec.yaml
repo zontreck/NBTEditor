@@ -11,7 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_treeview: ^1.0.7+1
-  uuid: ^4.2.2
+  libac_dart:
+    hosted: https://git.zontreck.com/api/packages/AriasCreations/pub/
+    version: 1.0.33
 
 dev_dependencies:
   flutter_test:

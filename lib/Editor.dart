@@ -1,9 +1,11 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
+import 'package:libac_dart/nbt/NbtIo.dart';
+import 'package:libac_dart/nbt/Tag.dart';
+import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
-import 'package:nbteditor/tags/NbtIo.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
 class Editor extends StatefulWidget {
@@ -56,7 +58,7 @@ class EditorState extends State<Editor> {
 
                 // Add a new compound tag as the root
                 Tag tag = CompoundTag();
-                nodes.add(tag.getNode("/"));
+                nodes.add(TagExt.getNode("/", tag) as Node);
               });
             },
           ),
@@ -80,13 +82,12 @@ class EditorState extends State<Editor> {
                 return;
               } else {
                 // String!!
-                compressed = await NbtIo.read(filePath);
+                CompoundTag ct = await NbtIo.read(filePath);
+                nodes.clear();
+                nodes.add(ct.getNode("/") as Node);
               }
 
               setState(() {
-                nodes.clear();
-                nodes.add(Tag.read(NbtIo.getStream()).getNode("/"));
-
                 controller = TreeViewController(children: nodes);
               });
             },
@@ -95,7 +96,7 @@ class EditorState extends State<Editor> {
       ),
       body: TreeView(
         nodeBuilder: (context, node) {
-          return (node.data as Tag).render();
+          return TagExt.render(node.data as Tag);
         },
         controller: controller,
       ),
