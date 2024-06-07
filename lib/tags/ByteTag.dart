@@ -8,11 +8,11 @@ extension ByteTagExt on ByteTag {
     return Node(key: path, label: "TAG_Byte ${getKey()}", data: this);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_Byte (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this)),
+          "${value}", false, true, canBeNamed(this), this, context),
     );
   }
 }

@@ -20,11 +20,11 @@ extension LongArrayTagExt on LongArrayTag {
         children: entries);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_LongArray (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor(
-          "${value.length} entries", true, false, canBeNamed(this)),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
+          false, canBeNamed(this), this, context),
     );
   }
 }

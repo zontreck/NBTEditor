@@ -8,11 +8,11 @@ extension DoubleTagExt on DoubleTag {
     return Node(key: path, label: "TAG_Double ${getKey()}", data: this);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_Double (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this)),
+          "${value}", false, true, canBeNamed(this), this, context),
     );
   }
 }

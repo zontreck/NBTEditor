@@ -13,6 +13,7 @@ import 'package:libac_dart/nbt/impl/LongArrayTag.dart';
 import 'package:libac_dart/nbt/impl/LongTag.dart';
 import 'package:libac_dart/nbt/impl/ShortTag.dart';
 import 'package:libac_dart/nbt/impl/StringTag.dart';
+import 'package:nbteditor/pages/AddPage.dart';
 import 'package:nbteditor/tags/ByteArrayTag.dart';
 import 'package:nbteditor/tags/ByteTag.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
@@ -27,55 +28,55 @@ import 'package:nbteditor/tags/ShortTag.dart';
 import 'package:nbteditor/tags/StringTag.dart';
 
 class TagExt {
-  static Widget render(Tag tag) {
+  static Widget render(Tag tag, BuildContext context) {
     switch (tag.getTagType()) {
       case TagType.List:
         {
-          return (tag as ListTag).render();
+          return (tag as ListTag).render(context);
         }
       case TagType.Byte:
         {
-          return (tag as ByteTag).render();
+          return (tag as ByteTag).render(context);
         }
       case TagType.Int:
         {
-          return (tag as IntTag).render();
+          return (tag as IntTag).render(context);
         }
       case TagType.Double:
         {
-          return (tag as DoubleTag).render();
+          return (tag as DoubleTag).render(context);
         }
       case TagType.LongArray:
         {
-          return (tag as LongArrayTag).render();
+          return (tag as LongArrayTag).render(context);
         }
       case TagType.Long:
         {
-          return (tag as LongTag).render();
+          return (tag as LongTag).render(context);
         }
       case TagType.IntArray:
         {
-          return (tag as IntArrayTag).render();
+          return (tag as IntArrayTag).render(context);
         }
       case TagType.ByteArray:
         {
-          return (tag as ByteArrayTag).render();
+          return (tag as ByteArrayTag).render(context);
         }
       case TagType.String:
         {
-          return (tag as StringTag).render();
+          return (tag as StringTag).render(context);
         }
       case TagType.Compound:
         {
-          return (tag as CompoundTag).render();
+          return (tag as CompoundTag).render(context);
         }
       case TagType.Short:
         {
-          return (tag as ShortTag).render();
+          return (tag as ShortTag).render(context);
         }
       case TagType.Float:
         {
-          return (tag as FloatTag).render();
+          return (tag as FloatTag).render(context);
         }
       case TagType.End:
         {
@@ -141,8 +142,8 @@ class TagExt {
     }
   }
 
-  static Widget getElementDescriptor(
-      String descript, bool canAddElements, bool editableValue, bool isNamed) {
+  static Widget getElementDescriptor(String descript, bool canAddElements,
+      bool editableValue, bool isNamed, Tag tag, BuildContext ctx) {
     return Row(
       children: [
         Text(descript),
@@ -150,7 +151,12 @@ class TagExt {
           width: 100,
         ),
         if (canAddElements)
-          ElevatedButton(onPressed: () {}, child: Icon(Icons.add)),
+          ElevatedButton(
+              onPressed: () async {
+                var response = await Navigator.pushNamed(ctx, "/add",
+                    arguments: AddElementArgs(tag: tag));
+              },
+              child: Icon(Icons.add)),
         if (isNamed)
           ElevatedButton(onPressed: () {}, child: Text("R E N A M E")),
         if (editableValue)

@@ -4,14 +4,16 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
 extension CompoundTagExt on CompoundTag {
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
         title: Text("TAG_Compound (${getKey()})"),
         subtitle: TagExt.getElementDescriptor(
             "${value.length} tag${value.length > 1 ? "s" : ""}",
             true,
             false,
-            canBeNamed(this)));
+            canBeNamed(this),
+            this,
+            context));
   }
 
   Node getNode(String path) {

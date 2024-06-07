@@ -17,13 +17,13 @@ extension ListTagExt on ListTag {
     return Node(key: path, label: getKey(), data: this, children: nodes);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     TagType type = TagType.End;
     if (value.length > 0) type = get(0).getTagType();
 
     return ListTile(
         title: Text("TAG_List (${getKey()}) (${type})"),
-        subtitle: TagExt.getElementDescriptor(
-            "${value.length} entries", true, false, canBeNamed(this)));
+        subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
+            false, canBeNamed(this), this, context));
   }
 }

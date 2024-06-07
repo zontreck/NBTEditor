@@ -96,7 +96,7 @@ class EditorState extends State<Editor> {
       ),
       body: TreeView(
         nodeBuilder: (context, node) {
-          return TagExt.render(node.data as Tag);
+          return TagExt.render(node.data as Tag, context);
         },
         controller: controller,
       ),

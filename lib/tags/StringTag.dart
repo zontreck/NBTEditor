@@ -9,11 +9,11 @@ extension StringTagExt on StringTag {
     return Node(key: path, label: "TAG_String ${getKey()}", data: this);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_String (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this)),
+          "${value}", false, true, canBeNamed(this), this, context),
     );
   }
 }

@@ -20,11 +20,11 @@ extension IntArrayTagExt on IntArrayTag {
         children: entries);
   }
 
-  Widget render() {
+  Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_IntArray (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor(
-          "${value.length} entries", true, false, canBeNamed(this)),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
+          false, canBeNamed(this), this, context),
     );
   }
 }
