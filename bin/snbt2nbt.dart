@@ -11,7 +11,7 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Consts2.dart';
 
 const HEADER =
-    "nbt2snbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: ${VERSION}\n\n";
+    "snbt2nbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: ${VERSION}\n\n";
 void main(List<String> args) async {
   Arguments usage = ArgumentsBuilder.builder()
       .withArgument(
@@ -19,10 +19,10 @@ void main(List<String> args) async {
       .withArgument(StringArgument(
           name: "input", value: "%", description: "The input file to convert"))
       .withArgument(StringArgument(
-          name: "out",
-          value: "%",
-          description:
-              "The path to the output file. If not supplied, STDOUT is used."))
+          name: "out", value: "%", description: "The path to the output file."))
+      .withArgument(BoolArgument(
+          name: "compress",
+          description: "If supplied, compresses the output file"))
       .build();
 
   Arguments defaults = Arguments();
@@ -39,13 +39,17 @@ void main(List<String> args) async {
     }
     String file = vArgs.getArg("input")!.getValue() as String;
 
-    CompoundTag ct = await NbtIo.read(file);
+    CompoundTag ct = await SnbtIo.readFromFile(file) as CompoundTag;
 
     if (!vArgs.hasArg("out")) {
-      print(SnbtIo.writeToString(ct));
+      print("Missing required argument: out");
+      exit(2);
     } else {
-      SnbtIo.writeToFile(vArgs.getArg("out")!.getValue() as String, ct);
-      print("Wrote SNBT output to file");
+      if (!vArgs.hasArg("compress"))
+        NbtIo.write(vArgs.getArg("out")!.getValue() as String, ct);
+      else
+        NbtIo.writeCompressed(vArgs.getArg("out")!.getValue() as String, ct);
+      print("Wrote NBT output to file");
     }
   }
 }
