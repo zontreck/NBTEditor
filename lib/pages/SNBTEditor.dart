@@ -35,7 +35,7 @@ class SnbtState extends State<SnbtEdit> {
           try {
             CompoundTag ct =
                 (await SnbtIo.readFromString(snbt.text)).asCompoundTag();
-            snbt.text = SnbtIo.writeToString(ct);
+            snbt.setCursor(0);
 
             setState(() {
               SessionData.ROOT_TAG = ct;
@@ -43,6 +43,8 @@ class SnbtState extends State<SnbtEdit> {
 
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Successfully edited NBT data")));
+
+            Navigator.pop(context);
           } catch (E) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text("FATAL ERROR: Your SNBT Syntax is not valid")));
