@@ -5,6 +5,7 @@ import 'package:libac_dart/nbt/NbtIo.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
+import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
@@ -16,7 +17,7 @@ class Editor extends StatefulWidget {
 }
 
 class EditorState extends State<Editor> {
-  List<Node> nodes = [CompoundTag().getNode("/")];
+  //List<Node> nodes = [CompoundTag().getNode("/")];
   bool compressed = false;
 
   static EditorState? _inst;
@@ -45,7 +46,8 @@ class EditorState extends State<Editor> {
 
   @override
   Widget build(BuildContext context) {
-    controller = TreeViewController(children: nodes);
+    controller =
+        TreeViewController(children: [SessionData.ROOT_TAG.getNode("/")]);
 
     return Scaffold(
       appBar: AppBar(
@@ -68,11 +70,7 @@ class EditorState extends State<Editor> {
             leading: const Icon(Icons.add),
             onTap: () {
               setState(() {
-                nodes.clear();
-
-                // Add a new compound tag as the root
-                Tag tag = CompoundTag();
-                nodes.add(TagExt.getNode("/", tag) as Node);
+                SessionData.ROOT_TAG = CompoundTag();
               });
             },
           ),
@@ -97,13 +95,23 @@ class EditorState extends State<Editor> {
               } else {
                 // String!!
                 CompoundTag ct = await NbtIo.read(filePath);
-                nodes.clear();
-                nodes.add(ct.getNode("/") as Node);
+
+                SessionData.ROOT_TAG = ct;
               }
 
               setState(() {
-                controller = TreeViewController(children: nodes);
+                controller = TreeViewController(
+                    children: [SessionData.ROOT_TAG.getNode("/")]);
               });
+            },
+          ),
+          ListTile(
+            title: Text("R A W"),
+            subtitle: Text("Edit as raw SNBT"),
+            leading: Icon(Icons.edit),
+            onTap: () async {
+              await Navigator.pushNamed(context, "/snbt");
+              setState(() {});
             },
           )
         ]),
