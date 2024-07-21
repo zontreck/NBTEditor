@@ -5,6 +5,7 @@ import 'package:libac_dart/nbt/NbtIo.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
+import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
@@ -66,7 +67,8 @@ class EditorState extends State<Editor> {
               child: Column(
             children: [
               Text("Named Binary Tag Editor"),
-              Text("Created by Tara Piccari")
+              Text("Created by Tara Piccari"),
+              Text("Version: ${VERSION}")
             ],
           )),
           ListTile(
