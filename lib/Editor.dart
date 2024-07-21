@@ -125,7 +125,13 @@ class EditorState extends State<Editor> {
       ),
       body: TreeView(
         nodeBuilder: (context, node) {
-          return TagExt.render(node.data as Tag, context, didChangeState);
+          if (node.data is Tag) {
+            return TagExt.render(node.data as Tag, context, didChangeState);
+          } else {
+            return ListTile(
+              title: Text("${node.label}"),
+            );
+          }
         },
         controller: controller,
       ),
