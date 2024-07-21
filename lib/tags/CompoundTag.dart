@@ -4,7 +4,7 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
 extension CompoundTagExt on CompoundTag {
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_Compound (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
@@ -12,7 +12,7 @@ extension CompoundTagExt on CompoundTag {
       ),
       leading: const Image(image: AssetImage("Icons/PNG/Compound.png")),
       trailing: TagExt.getElementButtons(
-          true, canBeNamed(this), false, this, context),
+          true, canBeNamed(this), false, this, context, didChangeState),
     );
   }
 

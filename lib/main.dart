@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nbteditor/Editor.dart';
 import 'package:nbteditor/pages/AddPage.dart';
+import 'package:nbteditor/pages/EditValue.dart';
 import 'package:nbteditor/pages/SNBTEditor.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MainApp extends StatelessWidget {
       routes: {
         "/": (context) => const Editor(),
         "/add": (context) => const AddPage(),
-        "/snbt": (context) => const SnbtEdit()
+        "/snbt": (context) => const SnbtEdit(),
       },
     );
   }

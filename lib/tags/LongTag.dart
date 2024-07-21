@@ -9,13 +9,13 @@ extension LongTagExt on LongTag {
     return Node(key: path, label: "TAG_Long ${getKey()}", data: this);
   }
 
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_Long (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("$value"),
       leading: const Image(image: AssetImage("Icons/PNG/Long.png")),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context),
+          false, canBeNamed(this), true, this, context, didChangeState),
     );
   }
 }

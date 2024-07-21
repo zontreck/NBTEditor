@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/Tag.dart';
@@ -15,6 +16,7 @@ import 'package:libac_dart/nbt/impl/ShortTag.dart';
 import 'package:libac_dart/nbt/impl/StringTag.dart';
 import 'package:nbteditor/Editor.dart';
 import 'package:nbteditor/pages/AddPage.dart';
+import 'package:nbteditor/pages/EditValue.dart';
 import 'package:nbteditor/pages/RenamePrompt.dart';
 import 'package:nbteditor/tags/ByteArrayTag.dart';
 import 'package:nbteditor/tags/ByteTag.dart';
@@ -30,55 +32,55 @@ import 'package:nbteditor/tags/ShortTag.dart';
 import 'package:nbteditor/tags/StringTag.dart';
 
 class TagExt {
-  static Widget render(Tag tag, BuildContext context) {
+  static Widget render(Tag tag, BuildContext context, Function didChangeState) {
     switch (tag.getTagType()) {
       case TagType.List:
         {
-          return (tag as ListTag).render(context);
+          return (tag as ListTag).render(context, didChangeState);
         }
       case TagType.Byte:
         {
-          return (tag as ByteTag).render(context);
+          return (tag as ByteTag).render(context, didChangeState);
         }
       case TagType.Int:
         {
-          return (tag as IntTag).render(context);
+          return (tag as IntTag).render(context, didChangeState);
         }
       case TagType.Double:
         {
-          return (tag as DoubleTag).render(context);
+          return (tag as DoubleTag).render(context, didChangeState);
         }
       case TagType.LongArray:
         {
-          return (tag as LongArrayTag).render(context);
+          return (tag as LongArrayTag).render(context, didChangeState);
         }
       case TagType.Long:
         {
-          return (tag as LongTag).render(context);
+          return (tag as LongTag).render(context, didChangeState);
         }
       case TagType.IntArray:
         {
-          return (tag as IntArrayTag).render(context);
+          return (tag as IntArrayTag).render(context, didChangeState);
         }
       case TagType.ByteArray:
         {
-          return (tag as ByteArrayTag).render(context);
+          return (tag as ByteArrayTag).render(context, didChangeState);
         }
       case TagType.String:
         {
-          return (tag as StringTag).render(context);
+          return (tag as StringTag).render(context, didChangeState);
         }
       case TagType.Compound:
         {
-          return (tag as CompoundTag).render(context);
+          return (tag as CompoundTag).render(context, didChangeState);
         }
       case TagType.Short:
         {
-          return (tag as ShortTag).render(context);
+          return (tag as ShortTag).render(context, didChangeState);
         }
       case TagType.Float:
         {
-          return (tag as FloatTag).render(context);
+          return (tag as FloatTag).render(context, didChangeState);
         }
       case TagType.End:
         {
@@ -145,7 +147,7 @@ class TagExt {
   }
 
   static Widget getElementButtons(bool canAddElements, bool isNamed,
-      bool editableValue, Tag tag, BuildContext ctx) {
+      bool editableValue, Tag tag, BuildContext ctx, Function didChangeState) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -210,7 +212,24 @@ class TagExt {
               },
               icon: Icon(Icons.drive_file_rename_outline)),
         if (editableValue)
-          IconButton(onPressed: () {}, icon: Icon(Icons.edit_document))
+          IconButton(
+              onPressed: () async {
+                var response = await showAdaptiveDialog(
+                    context: ctx,
+                    builder: (B) {
+                      return EditValuePrompt();
+                    },
+                    routeSettings: RouteSettings(arguments: tag));
+
+                if (response == null) {
+                  return;
+                } else {
+                  tag.setValue(response);
+
+                  didChangeState.call();
+                }
+              },
+              icon: Icon(Icons.edit_document))
       ],
     );
   }

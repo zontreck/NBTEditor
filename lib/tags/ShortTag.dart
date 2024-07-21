@@ -9,13 +9,13 @@ extension ShortTagExt on ShortTag {
     return Node(key: path, label: "TAG_Short ${getKey()}", data: this);
   }
 
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_Short (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("$value"),
       leading: const Image(image: AssetImage("Icons/PNG/Short.png")),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context),
+          false, canBeNamed(this), true, this, context, didChangeState),
     );
   }
 }

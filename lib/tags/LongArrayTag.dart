@@ -20,13 +20,13 @@ extension LongArrayTagExt on LongArrayTag {
         children: entries);
   }
 
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_LongArray (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       leading: const Image(image: AssetImage("Icons/PNG/LongArray.png")),
       trailing: TagExt.getElementButtons(
-          true, canBeNamed(this), false, this, context),
+          true, canBeNamed(this), false, this, context, didChangeState),
     );
   }
 }

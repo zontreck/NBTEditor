@@ -45,6 +45,10 @@ class EditorState extends State<Editor> {
     }
   }
 
+  void didChangeState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     controller =
@@ -119,7 +123,7 @@ class EditorState extends State<Editor> {
       ),
       body: TreeView(
         nodeBuilder: (context, node) {
-          return TagExt.render(node.data as Tag, context);
+          return TagExt.render(node.data as Tag, context, didChangeState);
         },
         controller: controller,
       ),

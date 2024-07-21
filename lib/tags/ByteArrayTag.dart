@@ -19,13 +19,13 @@ extension ByteArrayTagExt on ByteArrayTag {
         children: entries);
   }
 
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_ByteArray (${getKey()})"),
       leading: const Image(image: AssetImage("Icons/PNG/ByteArray.png")),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       trailing: TagExt.getElementButtons(
-          true, canBeNamed(this), false, this, context),
+          true, canBeNamed(this), false, this, context, didChangeState),
     );
   }
 }

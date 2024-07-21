@@ -8,7 +8,7 @@ extension ByteTagExt on ByteTag {
     return Node(key: path, label: "TAG_Byte ${getKey()}", data: this);
   }
 
-  Widget render(BuildContext context) {
+  Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_Byte (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
@@ -16,7 +16,7 @@ extension ByteTagExt on ByteTag {
       ),
       leading: const Image(image: AssetImage("Icons/PNG/Byte.png")),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context),
+          false, canBeNamed(this), true, this, context, didChangeState),
     );
   }
 }
