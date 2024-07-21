@@ -1,14 +1,14 @@
 name: nbteditor
 description: A Minecraft NBT Editor written in Flutter
 publish_to: 'none'
-version: 0.070224.2328
+version: 0.072124.0219
 
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
-  file_picker: ^6.1.1
+  file_picker: ^8.0.6
   flutter:
     sdk: flutter
   flutter_code_editor: ^0.3.2
@@ -16,12 +16,12 @@ dependencies:
   flutter_treeview: ^1.0.7+1
   libac_dart:
     hosted: https://git.zontreck.com/api/packages/AriasCreations/pub/
-    version: 1.1.070224+2329
+    version: 1.2.072024+2043
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
