@@ -11,27 +11,33 @@ pipeline {
     }
 
     stages {
-        step ("Build") {
-            script {
-                sh '''
-                #!/bin/bash
+        stage ("Build") {
+            steps {
 
-                flutter pub get
-                flutter build linux
-                flutter build apk
-                '''
+                script {
+                    sh '''
+                    #!/bin/bash
+
+                    flutter pub get
+                    flutter build linux
+                    flutter build apk
+                    '''
+                }
             }
         }
-        step ('Package') {
-            script {
-                sh '''
-                #!/bin/bash
+        stage ('Package') {
+            steps {
+                script {
+                    sh '''
+                    #!/bin/bash
 
-                cd build/linux/x64/release/bundle
-                tar -cvf ../../../../../linux.tgz ./
-                cd ../../../../app/outputs/flutter-apk
-                cp app-release.apk ../../../../
-                '''
+                    cd build/linux/x64/release/bundle
+                    tar -cvf ../../../../../linux.tgz ./
+                    cd ../../../../app/outputs/flutter-apk
+                    cp app-release.apk ../../../../
+                    '''
+                }
+
             }
         }
     }
