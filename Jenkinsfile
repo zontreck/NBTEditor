@@ -46,7 +46,7 @@ pipeline {
         always {
             archiveArtifacts artifacts: '*.tgz', fingerprint: true
             archiveArtifacts artifacts: '*.apk', fingerprint: true
-            archiveArtifacts artifacts: 'out/*', fingerprint: true
+            archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
             deleteDir()
         }
     }
