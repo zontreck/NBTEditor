@@ -19,11 +19,13 @@ extension ListTagExt on ListTag {
 
   Widget render(BuildContext context) {
     TagType type = TagType.End;
-    if (value.length > 0) type = get(0).getTagType();
+    if (value.isNotEmpty) type = get(0).getTagType();
 
     return ListTile(
-        title: Text("TAG_List (${getKey()}) (${type})"),
-        subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
-            false, canBeNamed(this), this, context));
+      title: Text("TAG_List (${getKey()}) ($type)"),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
+          false, canBeNamed(this), this, context),
+      leading: const Image(image: AssetImage("Icons/PNG/List.png")),
+    );
   }
 }

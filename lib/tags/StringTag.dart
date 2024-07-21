@@ -13,7 +13,8 @@ extension StringTagExt on StringTag {
     return ListTile(
       title: Text("TAG_String (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this), this, context),
+          value, false, true, canBeNamed(this), this, context),
+      leading: const Image(image: AssetImage("Icons/PNG/String.png")),
     );
   }
 }

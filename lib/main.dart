@@ -16,8 +16,8 @@ class MainApp extends StatelessWidget {
       theme: ThemeData.dark(),
       routes: {
         "/": (context) => const Editor(),
-        "/add": (context) => AddPage(),
-        "/snbt": (context) => SnbtEdit()
+        "/add": (context) => const AddPage(),
+        "/snbt": (context) => const SnbtEdit()
       },
     );
   }

@@ -7,6 +7,8 @@ import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/SessionData.dart';
 
 class SnbtEdit extends StatefulWidget {
+  const SnbtEdit({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return SnbtState();
@@ -27,7 +29,7 @@ class SnbtState extends State<SnbtEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SNBT Editor"),
+        title: const Text("SNBT Editor"),
         backgroundColor: Constants.TITLEBAR_COLOR,
       ),
       floatingActionButton: ElevatedButton(
@@ -42,18 +44,18 @@ class SnbtState extends State<SnbtEdit> {
             });
 
             ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Successfully edited NBT data")));
+                const SnackBar(content: Text("Successfully edited NBT data")));
 
             Navigator.pop(context);
           } catch (E) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("FATAL ERROR: Your SNBT Syntax is not valid")));
           }
         },
-        child: Text("Compile"),
+        child: const Text("Compile"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: CodeTheme(
           data: CodeThemeData(styles: vsTheme),
           child: SingleChildScrollView(

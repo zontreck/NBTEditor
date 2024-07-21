@@ -11,7 +11,7 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Consts2.dart';
 
 const HEADER =
-    "snbt2nbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: ${VERSION}\n\n";
+    "snbt2nbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: $VERSION\n\n";
 void main(List<String> args) async {
   Arguments usage = ArgumentsBuilder.builder()
       .withArgument(
@@ -45,10 +45,11 @@ void main(List<String> args) async {
       print("Missing required argument: out");
       exit(2);
     } else {
-      if (!vArgs.hasArg("compress"))
+      if (!vArgs.hasArg("compress")) {
         NbtIo.write(vArgs.getArg("out")!.getValue() as String, ct);
-      else
+      } else {
         NbtIo.writeCompressed(vArgs.getArg("out")!.getValue() as String, ct);
+      }
       print("Wrote NBT output to file");
     }
   }

@@ -26,10 +26,11 @@ class EditorState extends State<Editor> {
   }
   late TreeViewController controller;
   factory EditorState() {
-    if (_inst == null)
+    if (_inst == null) {
       return EditorState._();
-    else
+    } else {
       return _inst!;
+    }
   }
 
   void update() {
@@ -106,9 +107,9 @@ class EditorState extends State<Editor> {
             },
           ),
           ListTile(
-            title: Text("R A W"),
-            subtitle: Text("Edit as raw SNBT"),
-            leading: Icon(Icons.edit),
+            title: const Text("R A W"),
+            subtitle: const Text("Edit as raw SNBT"),
+            leading: const Icon(Icons.edit),
             onTap: () async {
               await Navigator.pushNamed(context, "/snbt");
               setState(() {});

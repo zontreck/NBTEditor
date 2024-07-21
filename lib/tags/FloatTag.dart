@@ -13,7 +13,8 @@ extension FloatTagExt on FloatTag {
     return ListTile(
       title: Text("TAG_Float (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this), this, context),
+          "$value", false, true, canBeNamed(this), this, context),
+      leading: const Image(image: AssetImage("Icons/PNG/Float.png")),
     );
   }
 }

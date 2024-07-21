@@ -82,7 +82,7 @@ class TagExt {
         }
       case TagType.End:
         {
-          return SizedBox();
+          return const SizedBox();
         }
     }
   }
@@ -139,7 +139,7 @@ class TagExt {
         }
       case TagType.End:
         {
-          return Node(key: "ENDTAG", label: "");
+          return const Node(key: "ENDTAG", label: "");
         }
     }
   }
@@ -149,7 +149,7 @@ class TagExt {
     return Row(
       children: [
         Text(descript),
-        SizedBox(
+        const SizedBox(
           width: 100,
         ),
         if (canAddElements)
@@ -160,10 +160,10 @@ class TagExt {
                 List<TagType> allowedTypes = [];
                 if (tag is CompoundTag) allowAllTagTypes = true;
                 if (tag is ListTag) {
-                  ListTag lst = tag as ListTag;
-                  if (lst.size() == 0)
+                  ListTag lst = tag;
+                  if (lst.size() == 0) {
                     allowAllTagTypes = true;
-                  else {
+                  } else {
                     allowAllTagTypes = false;
                     allowedTypes = [lst.get(0).getTagType()];
                   }
@@ -193,7 +193,7 @@ class TagExt {
                         isArray: isArray,
                         allowedTagTypes: allowedTypes));
               },
-              child: Icon(Icons.add)),
+              child: const Icon(Icons.add)),
         if (isNamed)
           ElevatedButton(
               onPressed: () async {
@@ -201,19 +201,19 @@ class TagExt {
                     context: ctx,
                     routeSettings: RouteSettings(arguments: tag.getKey()),
                     builder: (B) {
-                      return RenamePrompt();
+                      return const RenamePrompt();
                     });
 
                 if (response is String) {
-                  tag.setKey(response as String);
+                  tag.setKey(response);
 
                   EditorState state = EditorState();
                   state.update();
                 }
               },
-              child: Text("R E N A M E")),
+              child: const Text("R E N A M E")),
         if (editableValue)
-          ElevatedButton(onPressed: () {}, child: Text("E D I T"))
+          ElevatedButton(onPressed: () {}, child: const Text("E D I T"))
       ],
     );
   }

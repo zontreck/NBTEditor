@@ -6,14 +6,16 @@ import 'package:nbteditor/tags/Tag.dart';
 extension CompoundTagExt on CompoundTag {
   Widget render(BuildContext context) {
     return ListTile(
-        title: Text("TAG_Compound (${getKey()})"),
-        subtitle: TagExt.getElementDescriptor(
-            "${value.length} tag${value.length > 1 ? "s" : ""}",
-            true,
-            false,
-            canBeNamed(this),
-            this,
-            context));
+      title: Text("TAG_Compound (${getKey()})"),
+      subtitle: TagExt.getElementDescriptor(
+          "${value.length} tag${value.length > 1 ? "s" : ""}",
+          true,
+          false,
+          canBeNamed(this),
+          this,
+          context),
+      leading: const Image(image: AssetImage("Icons/PNG/Compound.png")),
+    );
   }
 
   Node getNode(String path) {

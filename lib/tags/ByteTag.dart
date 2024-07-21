@@ -12,7 +12,8 @@ extension ByteTagExt on ByteTag {
     return ListTile(
       title: Text("TAG_Byte (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value}", false, true, canBeNamed(this), this, context),
+          "$value", false, true, canBeNamed(this), this, context),
+      leading: const Image(image: AssetImage("Icons/PNG/Byte.png")),
     );
   }
 }

@@ -25,3 +25,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - "Icons/PNG/Boolean.png"
+    - "Icons/PNG/Byte.png"
+    - "Icons/PNG/ByteArray.png"
+    - "Icons/PNG/Compound.png"
+    - "Icons/PNG/Double.png"
+    - "Icons/PNG/Float.png"
+    - "Icons/PNG/Integer.png"
+    - "Icons/PNG/IntegerArray.png"
+    - "Icons/PNG/List.png"
+    - "Icons/PNG/Long.png"
+    - "Icons/PNG/LongArray.png"
+    - "Icons/PNG/Short.png"
+    - "Icons/PNG/String.png"
