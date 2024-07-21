@@ -19,8 +19,8 @@ pipeline {
                     #!/bin/bash
 
                     flutter pub get
-                    flutter build linux
-                    flutter build apk
+                    chmod +x compile.sh
+                    ./compile.sh
                     '''
                 }
             }
@@ -46,6 +46,7 @@ pipeline {
         always {
             archiveArtifacts artifacts: '*.tgz', fingerprint: true
             archiveArtifacts artifacts: '*.apk', fingerprint: true
+            archiveArtifacts artifacts: 'out/*', fingerprint: true
             deleteDir()
         }
     }
