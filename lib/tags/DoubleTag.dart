@@ -11,9 +11,10 @@ extension DoubleTagExt on DoubleTag {
   Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_Double (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor(
-          "$value", false, true, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("$value"),
       leading: const Image(image: AssetImage("Icons/PNG/Double.png")),
+      trailing: TagExt.getElementButtons(
+          false, canBeNamed(this), true, this, context),
     );
   }
 }

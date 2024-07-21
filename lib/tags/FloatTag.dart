@@ -12,9 +12,10 @@ extension FloatTagExt on FloatTag {
   Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_Float (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor(
-          "$value", false, true, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("$value"),
       leading: const Image(image: AssetImage("Icons/PNG/Float.png")),
+      trailing: TagExt.getElementButtons(
+          false, canBeNamed(this), true, this, context),
     );
   }
 }

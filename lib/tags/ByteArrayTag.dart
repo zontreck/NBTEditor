@@ -23,8 +23,9 @@ extension ByteArrayTagExt on ByteArrayTag {
     return ListTile(
       title: Text("TAG_ByteArray (${getKey()})"),
       leading: const Image(image: AssetImage("Icons/PNG/ByteArray.png")),
-      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
-          false, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries"),
+      trailing: TagExt.getElementButtons(
+          true, canBeNamed(this), false, this, context),
     );
   }
 }

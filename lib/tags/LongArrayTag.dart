@@ -23,9 +23,10 @@ extension LongArrayTagExt on LongArrayTag {
   Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_LongArray (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
-          false, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       leading: const Image(image: AssetImage("Icons/PNG/LongArray.png")),
+      trailing: TagExt.getElementButtons(
+          true, canBeNamed(this), false, this, context),
     );
   }
 }

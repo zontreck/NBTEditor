@@ -23,9 +23,10 @@ extension IntArrayTagExt on IntArrayTag {
   Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_IntArray (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
-          false, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       leading: const Image(image: AssetImage("Icons/PNG/IntegerArray.png")),
+      trailing: TagExt.getElementButtons(
+          true, canBeNamed(this), false, this, context),
     );
   }
 }

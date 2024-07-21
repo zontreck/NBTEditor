@@ -8,13 +8,11 @@ extension CompoundTagExt on CompoundTag {
     return ListTile(
       title: Text("TAG_Compound (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-          "${value.length} tag${value.length > 1 ? "s" : ""}",
-          true,
-          false,
-          canBeNamed(this),
-          this,
-          context),
+        "${value.length} tag${value.length > 1 ? "s" : ""}",
+      ),
       leading: const Image(image: AssetImage("Icons/PNG/Compound.png")),
+      trailing: TagExt.getElementButtons(
+          true, canBeNamed(this), false, this, context),
     );
   }
 

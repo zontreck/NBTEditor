@@ -144,16 +144,13 @@ class TagExt {
     }
   }
 
-  static Widget getElementDescriptor(String descript, bool canAddElements,
-      bool editableValue, bool isNamed, Tag tag, BuildContext ctx) {
+  static Widget getElementButtons(bool canAddElements, bool isNamed,
+      bool editableValue, Tag tag, BuildContext ctx) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(descript),
-        const SizedBox(
-          width: 100,
-        ),
         if (canAddElements)
-          ElevatedButton(
+          IconButton(
               onPressed: () async {
                 bool allowAllTagTypes = true;
                 bool isArray = false;
@@ -193,9 +190,9 @@ class TagExt {
                         isArray: isArray,
                         allowedTagTypes: allowedTypes));
               },
-              child: const Icon(Icons.add)),
+              icon: Icon(Icons.add)),
         if (isNamed)
-          ElevatedButton(
+          IconButton(
               onPressed: () async {
                 var response = await showDialog(
                     context: ctx,
@@ -211,11 +208,15 @@ class TagExt {
                   state.update();
                 }
               },
-              child: const Text("R E N A M E")),
+              icon: Icon(Icons.drive_file_rename_outline)),
         if (editableValue)
-          ElevatedButton(onPressed: () {}, child: const Text("E D I T"))
+          IconButton(onPressed: () {}, icon: Icon(Icons.edit_document))
       ],
     );
+  }
+
+  static Widget getElementDescriptor(String descript) {
+    return Text(descript);
   }
 }
 

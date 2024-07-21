@@ -12,9 +12,10 @@ extension StringTagExt on StringTag {
   Widget render(BuildContext context) {
     return ListTile(
       title: Text("TAG_String (${getKey()})"),
-      subtitle: TagExt.getElementDescriptor(
-          value, false, true, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor(value),
       leading: const Image(image: AssetImage("Icons/PNG/String.png")),
+      trailing: TagExt.getElementButtons(
+          false, canBeNamed(this), true, this, context),
     );
   }
 }

@@ -23,9 +23,10 @@ extension ListTagExt on ListTag {
 
     return ListTile(
       title: Text("TAG_List (${getKey()}) ($type)"),
-      subtitle: TagExt.getElementDescriptor("${value.length} entries", true,
-          false, canBeNamed(this), this, context),
+      subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       leading: const Image(image: AssetImage("Icons/PNG/List.png")),
+      trailing: TagExt.getElementButtons(
+          true, canBeNamed(this), false, this, context),
     );
   }
 }
