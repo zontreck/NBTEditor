@@ -55,8 +55,6 @@ pipeline {
                     dir("build\\windows\\x64\\runner\\Release") {
                         bat 'tar -cvf ..\\..\\..\\..\\..\\windows.tgz .'
                     }
-
-                    bat 'dart run msix:create'
                 }
             }
             post {
