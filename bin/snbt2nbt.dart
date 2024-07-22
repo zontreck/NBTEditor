@@ -11,7 +11,7 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Consts2.dart';
 
 const HEADER =
-    "snbt2nbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: $VERSION\n\n";
+    "snbt2nbt\nCopyright Piccari Creations 2024 - Tara Piccari\nVersion: $VERSION\nPurpose: Converts the more readable stringified NBT to Named Binary Tag format\n\n";
 void main(List<String> args) async {
   Arguments usage = ArgumentsBuilder.builder()
       .withArgument(
