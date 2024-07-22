@@ -25,7 +25,7 @@ extension ByteArrayTagExt on ByteArrayTag {
       leading: TagExt.getTagIcon(getTagType()),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       trailing: TagExt.getElementButtons(
-          true, canBeNamed(this), false, this, context, didChangeState, true),
+          true, canBeNamed(this), false, this, context, didChangeState),
     );
   }
 }

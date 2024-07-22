@@ -31,8 +31,7 @@ import 'package:nbteditor/tags/ShortTag.dart';
 import 'package:nbteditor/tags/StringTag.dart';
 
 class TagExt {
-  static Widget render(
-      Tag tag, BuildContext context, Function didChangeState, bool isRootTag) {
+  static Widget render(Tag tag, BuildContext context, Function didChangeState) {
     switch (tag.getTagType()) {
       case TagType.List:
         {
@@ -72,8 +71,7 @@ class TagExt {
         }
       case TagType.Compound:
         {
-          return (tag as CompoundTag)
-              .render(context, didChangeState, isRootTag);
+          return (tag as CompoundTag).render(context, didChangeState);
         }
       case TagType.Short:
         {
@@ -147,14 +145,8 @@ class TagExt {
     }
   }
 
-  static Widget getElementButtons(
-      bool canAddElements,
-      bool isNamed,
-      bool editableValue,
-      Tag tag,
-      BuildContext ctx,
-      Function didChangeState,
-      bool canBeDeleted) {
+  static Widget getElementButtons(bool canAddElements, bool isNamed,
+      bool editableValue, Tag tag, BuildContext ctx, Function didChangeState) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -238,10 +230,18 @@ class TagExt {
                 }
               },
               icon: const Icon(Icons.edit_document)),
-        if (canBeDeleted)
+        if (tag.hasParent)
           IconButton(
               onPressed: () async {
                 // Remove the current tag from the containing tag
+                Tag parent = tag.getParent!;
+                if (tag.parentTagType == TagType.Compound) {
+                  parent.asCompoundTag().remove(tag.getKey());
+                } else if (tag.parentTagType == TagType.List) {
+                  (parent as ListTag).remove(tag);
+                }
+
+                didChangeState.call();
               },
               icon: Icon(Icons.delete))
       ],

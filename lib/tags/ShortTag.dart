@@ -15,7 +15,7 @@ extension ShortTagExt on ShortTag {
       subtitle: TagExt.getElementDescriptor("$value"),
       leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context, didChangeState, true),
+          false, canBeNamed(this), true, this, context, didChangeState),
     );
   }
 }
