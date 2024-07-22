@@ -31,7 +31,8 @@ import 'package:nbteditor/tags/ShortTag.dart';
 import 'package:nbteditor/tags/StringTag.dart';
 
 class TagExt {
-  static Widget render(Tag tag, BuildContext context, Function didChangeState) {
+  static Widget render(
+      Tag tag, BuildContext context, Function didChangeState, bool isRootTag) {
     switch (tag.getTagType()) {
       case TagType.List:
         {
@@ -71,7 +72,8 @@ class TagExt {
         }
       case TagType.Compound:
         {
-          return (tag as CompoundTag).render(context, didChangeState);
+          return (tag as CompoundTag)
+              .render(context, didChangeState, isRootTag);
         }
       case TagType.Short:
         {
@@ -145,8 +147,14 @@ class TagExt {
     }
   }
 
-  static Widget getElementButtons(bool canAddElements, bool isNamed,
-      bool editableValue, Tag tag, BuildContext ctx, Function didChangeState) {
+  static Widget getElementButtons(
+      bool canAddElements,
+      bool isNamed,
+      bool editableValue,
+      Tag tag,
+      BuildContext ctx,
+      Function didChangeState,
+      bool canBeDeleted) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -229,7 +237,13 @@ class TagExt {
                   didChangeState.call();
                 }
               },
-              icon: const Icon(Icons.edit_document))
+              icon: const Icon(Icons.edit_document)),
+        if (canBeDeleted)
+          IconButton(
+              onPressed: () async {
+                // Remove the current tag from the containing tag
+              },
+              icon: Icon(Icons.delete))
       ],
     );
   }

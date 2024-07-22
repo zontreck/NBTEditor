@@ -15,7 +15,7 @@ extension FloatTagExt on FloatTag {
       subtitle: TagExt.getElementDescriptor("$value"),
       leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context, didChangeState),
+          false, canBeNamed(this), true, this, context, didChangeState, true),
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
@@ -194,7 +193,8 @@ class EditorState extends State<Editor> {
       body: TreeView(
         nodeBuilder: (context, node) {
           if (node.data is Tag) {
-            return TagExt.render(node.data as Tag, context, didChangeState);
+            return TagExt.render(
+                node.data as Tag, context, didChangeState, true);
           } else {
             return ListTile(
               title: Text(node.label),

@@ -16,7 +16,7 @@ extension ByteTagExt on ByteTag {
       ),
       leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
-          false, canBeNamed(this), true, this, context, didChangeState),
+          false, canBeNamed(this), true, this, context, didChangeState, true),
     );
   }
 }
