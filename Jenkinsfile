@@ -12,23 +12,26 @@ pipeline {
             }
             steps {
                 script {
-                    // Ensure that all necessary directories exist before operations
-                    sh 'flutter pub get'
-                    sh 'chmod +x compile.sh'
-                    sh './compile.sh'
+                    sh '''
+                    #!/bin/bash
 
-                    // Move to the correct directories and archive artifacts
-                    dir('build/linux/x64/release/bundle') {
-                        archiveArtifacts artifacts: '*.tgz', fingerprint: true
-                    }
-                    dir('build/app/outputs/flutter-apk') {
-                        archiveArtifacts artifacts: '*.apk', fingerprint: true
-                    }
-                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
+                    flutter pub get
+                    chmod +x compile.sh
+                    ./compile.sh
+
+                    cd build/linux/x64/release/bundle
+                    tar -cvf ../../../../../linux.tgz ./
+                    cd ../../../../app/outputs/flutter-apk
+                    cp app-release.apk ../../../../
+                    '''
                 }
             }
             post {
                 always {
+                    archiveArtifacts artifacts: '*.tgz', fingerprint: true
+                    archiveArtifacts artifacts: '*.apk', fingerprint: true
+                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
+
                     deleteDir()
                 }
             }
