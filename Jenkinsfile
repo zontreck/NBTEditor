@@ -2,54 +2,45 @@ pipeline {
     agent any
 
     options {
-        buildDiscarder(
-            logRotator(
-                numToKeepStr: '5'
-            )
-        )
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
     stages {
-        stage ("Build on Linux") {
+        stage("Build on Linux") {
             agent {
                 label 'linux'
             }
             steps {
-
                 script {
-                    sh '''
-                    #!/bin/bash
+                    // Ensure that all necessary directories exist before operations
+                    sh 'flutter pub get'
+                    sh 'chmod +x compile.sh'
+                    sh './compile.sh'
 
-                    flutter pub get
-                    chmod +x compile.sh
-                    ./compile.sh
-
-                    cd build/linux/x64/release/bundle
-                    tar -cvf ../../../../../linux.tgz ./
-                    cd ../../../../app/outputs/flutter-apk
-                    cp app-release.apk ../../../../
-                    '''
+                    // Move to the correct directories and archive artifacts
+                    dir('build/linux/x64/release/bundle') {
+                        archiveArtifacts artifacts: '*.tgz', fingerprint: true
+                    }
+                    dir('build/app/outputs/flutter-apk') {
+                        archiveArtifacts artifacts: '*.apk', fingerprint: true
+                    }
+                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '*.tgz', fingerprint: true
-                    archiveArtifacts artifacts: '*.apk', fingerprint: true
-                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
-
                     deleteDir()
                 }
             }
         }
-        stage ('Build on Windows') {
+
+        stage('Build on Windows') {
             agent {
                 label 'windows'
             }
             steps {
                 script {
                     bat '''
-                    @echo off
-
                     flutter build windows
                     dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart
                     dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart
