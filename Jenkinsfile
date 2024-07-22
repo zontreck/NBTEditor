@@ -19,6 +19,8 @@ pipeline {
                     chmod +x compile.sh
                     ./compile.sh
 
+                    rm out/.placeholder
+
                     cd build/linux/x64/release/bundle
                     tar -cvf ../../../../../linux.tgz ./
                     cd ../../../../app/outputs/flutter-apk
@@ -30,7 +32,7 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                     archiveArtifacts artifacts: '*.apk', fingerprint: true
-                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
+                    archiveArtifacts artifacts: 'out/*', fingerprint: true
 
                     deleteDir()
                 }
@@ -43,20 +45,21 @@ pipeline {
             }
             steps {
                 script {
-                    bat '''
-                    flutter pub get
-                    flutter build windows
-                    dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart
-                    dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart
+                    bat 'del out/.placeholder'
+                    bat 'flutter pub get'
+                    bat 'flutter build windows'
 
-                    cd build/windows/x64/runner/Release
-                    tar -cvf ../../../../../windows.tgz .
-                    '''
+                    bat 'dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart'
+                    bat 'dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart'
+
+                    dir("build/windows/x64/runner/Release") {
+                        bat 'tar -cvf ../../../../../windows.tgz .'
+                    }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'out/*.exe', fingerprint: true
+                    archiveArtifacts artifacts: 'out/*', fingerprint: true
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                 }
             }
