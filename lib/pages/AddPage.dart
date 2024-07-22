@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/ByteArrayTag.dart';
 import 'package:libac_dart/nbt/impl/IntArrayTag.dart';
@@ -63,9 +62,9 @@ class AddState extends State<AddPage> {
     if (!(isArray || isList)) {
       var reply = await showDialog(
           context: context,
-          routeSettings: RouteSettings(arguments: ""),
+          routeSettings: const RouteSettings(arguments: ""),
           builder: (builder) {
-            return RenamePrompt();
+            return const RenamePrompt();
           });
       newTagName = reply as String;
     }
@@ -84,7 +83,7 @@ class AddState extends State<AddPage> {
           context: context,
           routeSettings: RouteSettings(arguments: nTag),
           builder: (builder) {
-            return EditValuePrompt();
+            return const EditValuePrompt();
           });
       val = reply;
     }
@@ -135,7 +134,7 @@ class AddState extends State<AddPage> {
     if (isList || isArray && !canAddAnyType && singleShot) {
       singleShot = false;
 
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         processTagType(allowedTagTypes[0]);
       });
     }
@@ -146,7 +145,7 @@ class AddState extends State<AddPage> {
         backgroundColor: Constants.TITLEBAR_COLOR,
       ),
       body: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: ListView.builder(
             itemBuilder: (builder, index) {
               return ListTile(

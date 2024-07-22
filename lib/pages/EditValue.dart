@@ -3,6 +3,8 @@ import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/StringTag.dart';
 
 class EditValuePrompt extends StatefulWidget {
+  const EditValuePrompt({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return EditValueState();
@@ -22,7 +24,7 @@ class EditValueState extends State<EditValuePrompt> {
     if (args == null) return;
 
     if (args is Tag) {
-      Tag tag = args as Tag;
+      Tag tag = args;
       setState(() {
         TagValueType = tag.getTagType();
         MainTag = tag;
@@ -35,7 +37,7 @@ class EditValueState extends State<EditValuePrompt> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        icon: Icon(Icons.edit_document),
+        icon: const Icon(Icons.edit_document),
         title: Text("Edit Value - ${MainTag.getKey()}"),
         actions: [
           ElevatedButton(
@@ -64,16 +66,16 @@ class EditValueState extends State<EditValuePrompt> {
                 }
                 Navigator.pop(context, val);
               },
-              child: Text("Submit")),
+              child: const Text("Submit")),
           ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"))
+              child: const Text("Cancel"))
         ],
         content: TextField(
           controller: TEC,
-          decoration: InputDecoration(border: OutlineInputBorder()),
+          decoration: const InputDecoration(border: OutlineInputBorder()),
         ));
   }
 }

@@ -1,12 +1,9 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/NbtIo.dart';
 import 'package:libac_dart/nbt/SnbtIo.dart';
-import 'package:libac_dart/nbt/Stream.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
@@ -73,7 +70,7 @@ class EditorState extends State<Editor> {
             children: [
               Text("Named Binary Tag Editor"),
               Text("Created by Tara Piccari"),
-              Text("Version: ${VERSION}")
+              Text("Version: $VERSION")
             ],
           )),
           ListTile(
@@ -127,9 +124,9 @@ class EditorState extends State<Editor> {
             },
           ),
           ListTile(
-            title: Text("S A V E  N B T"),
-            subtitle: Text("Save to NBT"),
-            leading: Image(
+            title: const Text("S A V E  N B T"),
+            subtitle: const Text("Save to NBT"),
+            leading: const Image(
               image: AssetImage("Icons/PNG/AppLogo.png"),
             ),
             onTap: () async {
@@ -146,18 +143,18 @@ class EditorState extends State<Editor> {
                   context: context,
                   builder: (builder) {
                     return AlertDialog(
-                      title: Text("Compress the data?"),
+                      title: const Text("Compress the data?"),
                       actions: [
                         ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context, true);
                             },
-                            child: Text("YES")),
+                            child: const Text("YES")),
                         ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text("No"))
+                            child: const Text("No"))
                       ],
                     );
                   });
@@ -165,16 +162,17 @@ class EditorState extends State<Editor> {
               if (result == null) {
                 // Save uncompressed
                 NbtIo.write(
-                    filePath!, controller.children[0].data as CompoundTag);
-              } else
+                    filePath, controller.children[0].data as CompoundTag);
+              } else {
                 NbtIo.writeCompressed(
-                    filePath!, controller.children[0].data as CompoundTag);
+                    filePath, controller.children[0].data as CompoundTag);
+              }
             },
           ),
           ListTile(
-            title: Text("S A V E  S N B T"),
-            subtitle: Text("Save to SNBT"),
-            leading: Image(
+            title: const Text("S A V E  S N B T"),
+            subtitle: const Text("Save to SNBT"),
+            leading: const Image(
               image: AssetImage("Icons/PNG/String.png"),
             ),
             onTap: () async {
@@ -188,7 +186,7 @@ class EditorState extends State<Editor> {
               print(filePath);
 
               SnbtIo.writeToFile(
-                  filePath!, controller.children[0].data as CompoundTag);
+                  filePath, controller.children[0].data as CompoundTag);
             },
           )
         ]),
@@ -199,7 +197,7 @@ class EditorState extends State<Editor> {
             return TagExt.render(node.data as Tag, context, didChangeState);
           } else {
             return ListTile(
-              title: Text("${node.label}"),
+              title: Text(node.label),
             );
           }
         },

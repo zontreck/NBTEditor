@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nbteditor/Editor.dart';
 import 'package:nbteditor/pages/AddPage.dart';
-import 'package:nbteditor/pages/EditValue.dart';
 import 'package:nbteditor/pages/SNBTEditor.dart';
 
 void main() {

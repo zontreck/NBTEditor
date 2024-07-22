@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/Tag.dart';
@@ -193,7 +192,7 @@ class TagExt {
                         allowedTagTypes: allowedTypes,
                         didChangeState: didChangeState));
               },
-              icon: Icon(Icons.add)),
+              icon: const Icon(Icons.add)),
         if (isNamed)
           IconButton(
               onPressed: () async {
@@ -211,14 +210,14 @@ class TagExt {
                   state.update();
                 }
               },
-              icon: Icon(Icons.drive_file_rename_outline)),
+              icon: const Icon(Icons.drive_file_rename_outline)),
         if (editableValue)
           IconButton(
               onPressed: () async {
                 var response = await showAdaptiveDialog(
                     context: ctx,
                     builder: (B) {
-                      return EditValuePrompt();
+                      return const EditValuePrompt();
                     },
                     routeSettings: RouteSettings(arguments: tag));
 
@@ -230,7 +229,7 @@ class TagExt {
                   didChangeState.call();
                 }
               },
-              icon: Icon(Icons.edit_document))
+              icon: const Icon(Icons.edit_document))
       ],
     );
   }
