@@ -1,1 +1,1 @@
-const VERSION = "1.0722.24+0500";
+const VERSION = "1.0722.24+1506";
