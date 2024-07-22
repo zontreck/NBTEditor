@@ -45,21 +45,21 @@ pipeline {
             }
             steps {
                 script {
-                    bat 'del out/.placeholder'
+                    bat 'del out\\.placeholder'
                     bat 'flutter pub get'
                     bat 'flutter build windows'
 
-                    bat 'dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart'
-                    bat 'dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart'
+                    bat 'dart compile exe -o out\\snbt2nbt.exe bin\\snbt2nbt.dart'
+                    bat 'dart compile exe -o out\\nbt2snbt.exe bin\\nbt2snbt.dart'
 
-                    dir("build/windows/x64/runner/Release") {
-                        bat 'tar -cvf ../../../../../windows.tgz .'
+                    dir("build\\windows\\x64\\runner\\Release") {
+                        bat 'tar -cvf ..\\..\\..\\..\\..\\windows.tgz .'
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'out/*', fingerprint: true
+                    archiveArtifacts artifacts: 'out\\*', fingerprint: true
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                 }
             }
