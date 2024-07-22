@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "NBT Editor"
-#define MyAppVersion "1.0.072124.2257"
+#define MyAppVersion "1.0722.24.0018"
 #define MyAppPublisher "Piccari Creations"
 #define MyAppURL "https://zontreck.com"
 #define MyAppExeName "nbteditor.exe"
@@ -37,8 +37,8 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=out
 OutputBaseFilename=NBTEditor-setup
-Compression=lzma
-SolidCompression=yes
+Compression=zip
+SolidCompression=no
 WizardStyle=modern
 
 [Languages]
