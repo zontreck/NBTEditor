@@ -46,6 +46,6 @@ msix_config:
   display_name: NBT Editor
   publisher_display_name: Piccari Creations
   identity_name: dev.zontreck.nbteditor
-  msix_version: 0.072124.2047
+  msix_version: 0.0.072124.2047
   capabilities: internetClient
   logoPath: Icons/PNG/AppLogo.png
