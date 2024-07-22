@@ -24,7 +24,7 @@ extension IntArrayTagExt on IntArrayTag {
     return ListTile(
       title: Text("TAG_IntArray (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
-      leading: const Image(image: AssetImage("Icons/PNG/IntegerArray.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
           true, canBeNamed(this), false, this, context, didChangeState),
     );

@@ -13,7 +13,7 @@ extension IntTagExt on IntTag {
     return ListTile(
       title: Text("TAG_Int (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("$value"),
-      leading: const Image(image: AssetImage("Icons/PNG/Integer.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
           false, canBeNamed(this), true, this, context, didChangeState),
     );

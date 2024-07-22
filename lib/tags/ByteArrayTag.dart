@@ -22,7 +22,7 @@ extension ByteArrayTagExt on ByteArrayTag {
   Widget render(BuildContext context, Function didChangeState) {
     return ListTile(
       title: Text("TAG_ByteArray (${getKey()})"),
-      leading: const Image(image: AssetImage("Icons/PNG/ByteArray.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
       trailing: TagExt.getElementButtons(
           true, canBeNamed(this), false, this, context, didChangeState),

@@ -17,7 +17,9 @@ class EditValueState extends State<EditValuePrompt> {
 
   @override
   void didChangeDependencies() {
-    var args = ModalRoute.of(context)!.settings.arguments!;
+    var args = ModalRoute.of(context)!.settings.arguments;
+
+    if (args == null) return;
 
     if (args is Tag) {
       Tag tag = args as Tag;

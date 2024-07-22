@@ -13,7 +13,7 @@ extension LongTagExt on LongTag {
     return ListTile(
       title: Text("TAG_Long (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("$value"),
-      leading: const Image(image: AssetImage("Icons/PNG/Long.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
           false, canBeNamed(this), true, this, context, didChangeState),
     );

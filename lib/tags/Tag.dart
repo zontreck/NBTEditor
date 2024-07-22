@@ -190,7 +190,8 @@ class TagExt {
                         tag: tag,
                         allowAllTagTypes: allowAllTagTypes,
                         isArray: isArray,
-                        allowedTagTypes: allowedTypes));
+                        allowedTagTypes: allowedTypes,
+                        didChangeState: didChangeState));
               },
               icon: Icon(Icons.add)),
         if (isNamed)
@@ -236,6 +237,14 @@ class TagExt {
 
   static Widget getElementDescriptor(String descript) {
     return Text(descript);
+  }
+
+  static String getTagIconPath(TagType type) {
+    return "Icons/PNG/${type.name}.png";
+  }
+
+  static Widget getTagIcon(TagType type) {
+    return Image(image: AssetImage(getTagIconPath(type)));
   }
 }
 

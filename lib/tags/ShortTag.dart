@@ -13,7 +13,7 @@ extension ShortTagExt on ShortTag {
     return ListTile(
       title: Text("TAG_Short (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("$value"),
-      leading: const Image(image: AssetImage("Icons/PNG/Short.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
           false, canBeNamed(this), true, this, context, didChangeState),
     );

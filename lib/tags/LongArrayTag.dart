@@ -24,7 +24,7 @@ extension LongArrayTagExt on LongArrayTag {
     return ListTile(
       title: Text("TAG_LongArray (${getKey()})"),
       subtitle: TagExt.getElementDescriptor("${value.length} entries"),
-      leading: const Image(image: AssetImage("Icons/PNG/LongArray.png")),
+      leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
           true, canBeNamed(this), false, this, context, didChangeState),
     );
