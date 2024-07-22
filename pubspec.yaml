@@ -22,7 +22,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  msix: ^3.16.7
 
 flutter:
   uses-material-design: true
@@ -41,11 +40,3 @@ flutter:
     - "Icons/PNG/LongArray.png"
     - "Icons/PNG/Short.png"
     - "Icons/PNG/String.png"
-
-msix_config:
-  display_name: NBT Editor
-  publisher_display_name: Piccari Creations
-  identity_name: dev.zontreck.nbteditor
-  msix_version: 1.0.0.1
-  capabilities: internetClient
-  logoPath: Icons/PNG/AppLogo.png
