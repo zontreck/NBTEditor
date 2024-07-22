@@ -44,12 +44,13 @@ pipeline {
             steps {
                 script {
                     bat '''
+                    flutter pub get
                     flutter build windows
                     dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart
                     dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart
 
-                    cd build/windows/x64/release/bundle
-                    tar -cvf ../../../../bundle/windows.tgz .
+                    cd build/windows/x64/runner/Release
+                    tar -cvf ../../../../../windows.tgz .
                     '''
                 }
             }
