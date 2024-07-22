@@ -63,6 +63,8 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: 'out\\*', fingerprint: true
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
+
+                    deleteDir()
                 }
             }
         }
