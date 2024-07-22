@@ -1,7 +1,7 @@
 name: nbteditor
 description: A Minecraft NBT Editor written in Flutter
 publish_to: 'none'
-version: 0.0722.24+0042
+version: 1.0722.24+0132
 
 
 environment:
@@ -40,3 +40,5 @@ flutter:
     - "Icons/PNG/LongArray.png"
     - "Icons/PNG/Short.png"
     - "Icons/PNG/String.png"
+    - "Icons/PNG/AppLogo.png"
+    - "Icons/PNG/AppLogo-sweet.png"
