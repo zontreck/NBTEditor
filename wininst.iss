@@ -11,50 +11,6 @@
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 
-[Code]
-procedure UpdatePathWithAppBin();
-var
-  PathVar: string;
-  BinPath: string;
-begin
-  // Retrieve current PATH environment variable
-  PathVar := GetEnv('PATH');
-
-  // Construct the full path to the bin directory
-  BinPath := ExpandConstant('{app}\bin');
-
-  // Check if the bin directory is not already in PATH
-  if Pos(BinPath, PathVar) = 0 then
-  begin
-    // Append bin directory to PATH
-    if PathVar <> '' then
-      PathVar := PathVar + ';';
-    PathVar := PathVar + BinPath;
-
-    // Update the PATH environment variable
-    SetEnv('PATH', PathVar);
-  end;
-end;
-procedure RemovePathWithAppBin();
-var
-  PathVar: string;
-  BinPath: string;
-begin
-  // Retrieve current PATH environment variable
-  PathVar := GetEnv('PATH');
-
-  // Construct the full path to the bin directory
-  BinPath := ExpandConstant('{app}\bin');
-
-  // Remove bin directory from PATH
-  PathVar := StringReplace(PathVar, BinPath + ';', '', [rfReplaceAll, rfIgnoreCase]);
-  PathVar := StringReplace(PathVar, BinPath, '', [rfReplaceAll, rfIgnoreCase]);
-
-  // Update the PATH environment variable
-  SetEnv('PATH', PathVar);
-end;
-
-
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -113,8 +69,4 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; AfterInstall: UpdatePathWithAppBin
-
-
-[UninstallRun]
-Filename: "{code:RemovePathWithAppBin}"; Flags: runhidden
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
