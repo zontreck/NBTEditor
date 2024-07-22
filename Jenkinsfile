@@ -1,7 +1,6 @@
 pipeline {
-    agent {
-        label 'linux'
-    }
+    agent any
+
     options {
         buildDiscarder(
             logRotator(
@@ -11,7 +10,10 @@ pipeline {
     }
 
     stages {
-        stage ("Build") {
+        stage ("Build on Linux") {
+            agent {
+                label 'linux'
+            }
             steps {
 
                 script {
@@ -21,15 +23,6 @@ pipeline {
                     flutter pub get
                     chmod +x compile.sh
                     ./compile.sh
-                    '''
-                }
-            }
-        }
-        stage ('Package') {
-            steps {
-                script {
-                    sh '''
-                    #!/bin/bash
 
                     cd build/linux/x64/release/bundle
                     tar -cvf ../../../../../linux.tgz ./
@@ -37,17 +30,41 @@ pipeline {
                     cp app-release.apk ../../../../
                     '''
                 }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: '*.tgz', fingerprint: true
+                    archiveArtifacts artifacts: '*.apk', fingerprint: true
+                    archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
 
+                    deleteDir()
+                }
             }
         }
-    }
+        stage ('Build on Windows') {
+            agent {
+                label 'windows'
+            }
+            steps {
+                script {
+                    bat '''
+                    @echo off
 
-    post {
-        always {
-            archiveArtifacts artifacts: '*.tgz', fingerprint: true
-            archiveArtifacts artifacts: '*.apk', fingerprint: true
-            archiveArtifacts artifacts: 'out/*nb*', fingerprint: true
-            deleteDir()
+                    flutter build windows
+                    dart compile exe -o out/snbt2nbt.exe bin/snbt2nbt.dart
+                    dart compile exe -o out/nbt2snbt.exe bin/nbt2snbt.dart
+
+                    cd build/windows/x64/release/bundle
+                    tar -cvf ../../../../bundle/windows.tgz .
+                    '''
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'out/*.exe', fingerprint: true
+                    archiveArtifacts artifacts: '*.tgz', fingerprint: true
+                }
+            }
         }
     }
 }
