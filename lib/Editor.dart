@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/NbtIo.dart';
+import 'package:libac_dart/nbt/SnbtIo.dart';
+import 'package:libac_dart/nbt/Stream.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
@@ -119,6 +124,71 @@ class EditorState extends State<Editor> {
             onTap: () async {
               await Navigator.pushNamed(context, "/snbt");
               setState(() {});
+            },
+          ),
+          ListTile(
+            title: Text("S A V E  N B T"),
+            subtitle: Text("Save to NBT"),
+            leading: Image(
+              image: AssetImage("Icons/PNG/AppLogo.png"),
+            ),
+            onTap: () async {
+              // Prompt for where to save
+              String? filePath = await FilePicker.platform
+                  .saveFile(dialogTitle: "Where do you want to save the file?");
+              if (filePath == null) {
+                print("No file selected");
+                return;
+              }
+              print(filePath);
+
+              var result = await showDialog(
+                  context: context,
+                  builder: (builder) {
+                    return AlertDialog(
+                      title: Text("Compress the data?"),
+                      actions: [
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            child: Text("YES")),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("No"))
+                      ],
+                    );
+                  });
+
+              if (result == null) {
+                // Save uncompressed
+                NbtIo.write(
+                    filePath!, controller.children[0].data as CompoundTag);
+              } else
+                NbtIo.writeCompressed(
+                    filePath!, controller.children[0].data as CompoundTag);
+            },
+          ),
+          ListTile(
+            title: Text("S A V E  S N B T"),
+            subtitle: Text("Save to SNBT"),
+            leading: Image(
+              image: AssetImage("Icons/PNG/String.png"),
+            ),
+            onTap: () async {
+              // Prompt for where to save
+              String? filePath = await FilePicker.platform
+                  .saveFile(dialogTitle: "Where do you want to save the file?");
+              if (filePath == null) {
+                print("No file selected");
+                return;
+              }
+              print(filePath);
+
+              SnbtIo.writeToFile(
+                  filePath!, controller.children[0].data as CompoundTag);
             },
           )
         ]),
