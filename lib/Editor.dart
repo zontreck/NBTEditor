@@ -126,10 +126,11 @@ class EditorState extends State<Editor> {
             title: const Text("S A V E  N B T"),
             subtitle: const Text("Save to NBT"),
             leading: const Image(
-              image: AssetImage("Icons/PNG/AppLogo.png"),
+              image: AssetImage("Icons/PNG/nbteditor.png"),
             ),
             onTap: () async {
               // Prompt for where to save
+              print("Begin picking file to save to");
               String? filePath = await FilePicker.platform
                   .saveFile(dialogTitle: "Where do you want to save the file?");
               if (filePath == null) {
@@ -176,6 +177,7 @@ class EditorState extends State<Editor> {
             ),
             onTap: () async {
               // Prompt for where to save
+              print("Begin picking file to save to");
               String? filePath = await FilePicker.platform
                   .saveFile(dialogTitle: "Where do you want to save the file?");
               if (filePath == null) {
