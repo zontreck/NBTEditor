@@ -25,6 +25,8 @@ pipeline {
                     tar -cvf ../../../../../linux.tgz ./
                     cd ../../../../app/outputs/flutter-apk
                     cp app-release.apk ../../../../
+
+                    appimage-builder --recipe AppImageBuilder.yml
                     '''
                 }
             }
@@ -33,6 +35,7 @@ pipeline {
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                     archiveArtifacts artifacts: '*.apk', fingerprint: true
                     archiveArtifacts artifacts: 'out/*', fingerprint: true
+                    archiveArtifacts artifacts: '*.AppImage', fingerprint: true
 
                     deleteDir()
                 }
