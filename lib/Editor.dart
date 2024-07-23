@@ -1,5 +1,7 @@
-import 'package:file_picker/file_picker.dart';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/NbtIo.dart';
 import 'package:libac_dart/nbt/SnbtIo.dart';
@@ -87,10 +89,9 @@ class EditorState extends State<Editor> {
             leading: const Icon(Icons.folder),
             subtitle: const Text("Open an existing NBT Document for editing"),
             onTap: () async {
-              FilePickerResult? result = await FilePicker.platform.pickFiles();
-              String? filePath;
-              if (result != null) {
-                filePath = result.files.single.path;
+              String? filePath = await FlutterFileDialog.pickFile(
+                  params: OpenFileDialogParams());
+              if (filePath != null) {
                 // Do something with the selected file path
                 print('Selected file path: $filePath');
               } else {
@@ -129,16 +130,6 @@ class EditorState extends State<Editor> {
               image: AssetImage("Icons/PNG/nbteditor.png"),
             ),
             onTap: () async {
-              // Prompt for where to save
-              print("Begin picking file to save to");
-              String? filePath = await FilePicker.platform
-                  .saveFile(dialogTitle: "Where do you want to save the file?");
-              if (filePath == null) {
-                print("No file selected");
-                return;
-              }
-              print(filePath);
-
               var result = await showDialog(
                   context: context,
                   builder: (builder) {
@@ -159,14 +150,25 @@ class EditorState extends State<Editor> {
                     );
                   });
 
+              Uint8List u8l = Uint8List(0);
               if (result == null) {
                 // Save uncompressed
-                NbtIo.write(
-                    filePath, controller.children[0].data as CompoundTag);
+                u8l = await NbtIo.writeToStream(
+                    controller.children[0].data as CompoundTag);
               } else {
-                NbtIo.writeCompressed(
-                    filePath, controller.children[0].data as CompoundTag);
+                u8l = await NbtIo.writeToStreamCompressed(
+                    controller.children[0].data as CompoundTag);
               }
+              // Prompt for where to save
+              print("Begin picking file to save to");
+              var params = await SaveFileDialogParams(data: u8l);
+              var filePath = await FlutterFileDialog.saveFile(params: params);
+
+              if (filePath == null) {
+                print("No file selected");
+                return;
+              }
+              print(filePath);
             },
           ),
           ListTile(
@@ -178,8 +180,8 @@ class EditorState extends State<Editor> {
             onTap: () async {
               // Prompt for where to save
               print("Begin picking file to save to");
-              String? filePath = await FilePicker.platform
-                  .saveFile(dialogTitle: "Where do you want to save the file?");
+              String? filePath = await FlutterFileDialog.saveFile(
+                  params: SaveFileDialogParams());
               if (filePath == null) {
                 print("No file selected");
                 return;
