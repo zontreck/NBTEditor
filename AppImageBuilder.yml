@@ -10,7 +10,7 @@ script:
   - mkdir -p AppDir/usr/share/icons/hicolor/64x64/apps
   - cp Icons/PNG/nbteditor.png AppDir/usr/share/icons/hicolor/64x64/apps/
 AppDir:
-  path: AppDir
+  path: $PWD/AppDir
   app_info:
     id: dev.zontreck.nbteditor
     name: NBT Editor
