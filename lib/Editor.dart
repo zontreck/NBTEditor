@@ -90,7 +90,7 @@ class EditorState extends State<Editor> {
             subtitle: const Text("Open an existing NBT Document for editing"),
             onTap: () async {
               String? filePath = await FlutterFileDialog.pickFile(
-                  params: OpenFileDialogParams());
+                  params: const OpenFileDialogParams());
               if (filePath != null) {
                 // Do something with the selected file path
                 print('Selected file path: $filePath');
@@ -161,7 +161,7 @@ class EditorState extends State<Editor> {
               }
               // Prompt for where to save
               print("Begin picking file to save to");
-              var params = await SaveFileDialogParams(data: u8l);
+              var params = SaveFileDialogParams(data: u8l);
               var filePath = await FlutterFileDialog.saveFile(params: params);
 
               if (filePath == null) {

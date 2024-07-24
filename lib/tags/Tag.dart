@@ -243,7 +243,7 @@ class TagExt {
 
                 didChangeState.call();
               },
-              icon: Icon(Icons.delete))
+              icon: const Icon(Icons.delete))
       ],
     );
   }
