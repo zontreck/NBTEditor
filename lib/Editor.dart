@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Editor extends StatefulWidget {
   const Editor({super.key});
@@ -127,7 +129,7 @@ class EditorState extends State<Editor> {
             title: const Text("S A V E  N B T"),
             subtitle: const Text("Save to NBT"),
             leading: const Image(
-              image: AssetImage("Icons/PNG/nbteditor.png"),
+              image: AssetImage("Icons/PNG/Compound.png"),
             ),
             onTap: () async {
               var result = await showDialog(
@@ -161,8 +163,7 @@ class EditorState extends State<Editor> {
               }
               // Prompt for where to save
               print("Begin picking file to save to");
-              var params = SaveFileDialogParams(data: u8l);
-              var filePath = await FlutterFileDialog.saveFile(params: params);
+              var filePath = await FlutterFileDialog.saveFile();
 
               if (filePath == null) {
                 print("No file selected");
