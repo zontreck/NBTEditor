@@ -17,17 +17,19 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       routes: {
-        "/": (context) => StartPage(),
+        "/": (context) => const StartPage(),
         "/edit": (context) => const Editor(),
         "/add": (context) => const AddPage(),
         "/snbt": (context) => const SnbtEdit(),
-        "/perms": (context) => PermissionsRequiredPage()
+        "/perms": (context) => const PermissionsRequiredPage()
       },
     );
   }
 }
 
 class StartPage extends StatefulWidget {
+  const StartPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return StartPageState();
@@ -42,7 +44,7 @@ class StartPageState extends State<StartPage> {
 
   Future<void> checkPermissions() async {
     if (await Permission.manageExternalStorage.isDenied) {
-      await Future.delayed(Duration(seconds: 5), () {
+      await Future.delayed(const Duration(seconds: 5), () {
         Navigator.pushReplacementNamed(context, "/perms");
       });
     } else {
@@ -52,7 +54,7 @@ class StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [Image(image: AssetImage("Icons/PNG/nbteditor.png"))],
       ),

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class Editor extends StatefulWidget {
   const Editor({super.key});
