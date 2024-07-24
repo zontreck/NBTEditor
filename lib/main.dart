@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:nbteditor/Editor.dart';
 import 'package:nbteditor/pages/AddPage.dart';
@@ -39,7 +41,10 @@ class StartPage extends StatefulWidget {
 class StartPageState extends State<StartPage> {
   @override
   void didChangeDependencies() {
-    checkPermissions();
+    if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS)
+      checkPermissions();
+    else
+      Navigator.pushReplacementNamed(context, "/edit");
   }
 
   Future<void> checkPermissions() async {
@@ -56,7 +61,14 @@ class StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Column(
-        children: [Image(image: AssetImage("Icons/PNG/nbteditor.png"))],
+        children: [
+          SizedBox(height: 100),
+          Image(
+            image: AssetImage("Icons/PNG/nbteditor.png"),
+            height: 500,
+            width: 500,
+          )
+        ],
       ),
     );
   }
