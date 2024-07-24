@@ -26,6 +26,7 @@ pipeline {
                     cd ../../../../app/outputs/flutter-apk
                     cp app-release.apk ../../../../
 
+                    cd ../../../../
                     appimage-builder --recipe AppImageBuilder.yml
                     '''
                 }
