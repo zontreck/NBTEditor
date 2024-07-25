@@ -10,6 +10,7 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
+import 'package:nbteditor/main.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
@@ -89,6 +90,10 @@ class EditorState extends State<Editor> {
             leading: const Icon(Icons.folder),
             subtitle: const Text("Open an existing NBT Document for editing"),
             onTap: () async {
+              if (await needsPermissionsPage()) {
+                Navigator.pushNamed(context, "/perms");
+                return;
+              }
               String? filePath;
               var result = await FilePicker.platform.pickFiles();
               if (result != null) {
@@ -131,6 +136,10 @@ class EditorState extends State<Editor> {
               image: AssetImage("Icons/PNG/Compound.png"),
             ),
             onTap: () async {
+              if (await needsPermissionsPage()) {
+                Navigator.pushNamed(context, "/perms");
+                return;
+              }
               var result = await showDialog(
                   context: context,
                   builder: (builder) {
@@ -181,6 +190,10 @@ class EditorState extends State<Editor> {
               image: AssetImage("Icons/PNG/String.png"),
             ),
             onTap: () async {
+              if (await needsPermissionsPage()) {
+                Navigator.pushNamed(context, "/perms");
+                return;
+              }
               // Prompt for where to save
               print("Begin picking file to save to");
               var FSL = await FilePicker.platform.saveFile(bytes: Uint8List(0));
