@@ -94,7 +94,7 @@ class EditorState extends State<Editor> {
               if (result != null) {
                 // Do something with the selected file path
                 print('Selected file path: $filePath');
-                filePath = result!.files.first.path;
+                filePath = result.files.first.path;
               } else {
                 // User canceled the picker
                 print('File selection canceled.');
