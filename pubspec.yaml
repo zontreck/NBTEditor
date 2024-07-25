@@ -8,10 +8,10 @@ environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
+  file_picker: ^8.0.0+1
   flutter:
     sdk: flutter
   flutter_code_editor: ^0.3.2
-  flutter_file_dialog: ^3.0.2
   flutter_highlight: ^0.7.0
   flutter_treeview: ^1.0.7+1
   libac_dart:

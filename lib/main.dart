@@ -53,7 +53,9 @@ class StartPageState extends State<StartPage> {
         Navigator.pushReplacementNamed(context, "/perms");
       });
     } else {
-      Navigator.pushReplacementNamed(context, "/edit");
+      await Future.delayed(Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context, "/edit");
+      });
     }
   }
 
