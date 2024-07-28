@@ -248,7 +248,7 @@ class EditorState extends State<Editor> {
 
                         didChangeState();
                       },
-                      child: Icon(Icons.delete_forever))
+                      child: const Icon(Icons.delete_forever))
                 ],
               ),
             );

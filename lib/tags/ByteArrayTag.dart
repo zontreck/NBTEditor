@@ -13,7 +13,7 @@ extension ByteArrayTagExt on ByteArrayTag {
       entries.add(Node(
           key: "$path/$count",
           label: "$element",
-          data: ArrayEntry(value: "${element}", parent: this, index: count)));
+          data: ArrayEntry(value: "$element", parent: this, index: count)));
       count++;
     }
 

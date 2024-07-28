@@ -8,11 +8,11 @@ import 'package:nbteditor/pages/permsrequired.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({
+  const MainApp({
     super.key,
   });
 
@@ -38,8 +38,10 @@ Future<bool> needsPermissionsPage() async {
   if (needsPermissions()) {
     if (await Permission.manageExternalStorage.isDenied) {
       return true;
-    } else
+    } else {
       return false;
-  } else
+    }
+  } else {
     return false;
+  }
 }

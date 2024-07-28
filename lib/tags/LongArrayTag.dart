@@ -13,7 +13,7 @@ extension LongArrayTagExt on LongArrayTag {
       entries.add(Node(
           key: "$path/$count",
           label: "$element",
-          data: ArrayEntry(value: "${element}", parent: this, index: count)));
+          data: ArrayEntry(value: "$element", parent: this, index: count)));
       count++;
     }
 
