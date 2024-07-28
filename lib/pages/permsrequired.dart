@@ -31,7 +31,7 @@ class PermissionsRequiredPage extends StatelessWidget {
                               content: Text(
                                   "The storage permission is reporting it is permanently denied. Please open settings and allow that permission.")));
                         } else if (stat.isGranted) {
-                          Future.delayed(const Duration(seconds: 5), () {
+                          Future.delayed(const Duration(seconds: 2), () {
                             Navigator.pop(context);
                           });
                         }

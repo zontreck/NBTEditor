@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_treeview/src/models/node.dart';
 import 'package:libac_dart/nbt/impl/IntArrayTag.dart';
 
+import 'ArrayEntry.dart';
 import 'Tag.dart';
 
 extension IntArrayTagExt on IntArrayTag {
@@ -9,7 +10,10 @@ extension IntArrayTagExt on IntArrayTag {
     List<Node> entries = [];
     int count = 0;
     for (var element in value) {
-      entries.add(Node(key: "$path/$count", label: "$element", data: element));
+      entries.add(Node(
+          key: "$path/$count",
+          label: "$element",
+          data: ArrayEntry(value: "${element}", parent: this, index: count)));
       count++;
     }
 

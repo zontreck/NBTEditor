@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/impl/LongArrayTag.dart';
+import 'package:nbteditor/tags/ArrayEntry.dart';
 
 import 'Tag.dart';
 
@@ -9,7 +10,10 @@ extension LongArrayTagExt on LongArrayTag {
     List<Node> entries = [];
     int count = 0;
     for (var element in value) {
-      entries.add(Node(key: "$path/$count", label: "$element", data: element));
+      entries.add(Node(
+          key: "$path/$count",
+          label: "$element",
+          data: ArrayEntry(value: "${element}", parent: this, index: count)));
       count++;
     }
 

@@ -6,11 +6,15 @@ import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/NbtIo.dart';
 import 'package:libac_dart/nbt/SnbtIo.dart';
 import 'package:libac_dart/nbt/Tag.dart';
+import 'package:libac_dart/nbt/impl/ByteArrayTag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
+import 'package:libac_dart/nbt/impl/IntArrayTag.dart';
+import 'package:libac_dart/nbt/impl/LongArrayTag.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/main.dart';
+import 'package:nbteditor/tags/ArrayEntry.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
@@ -219,10 +223,37 @@ class EditorState extends State<Editor> {
         nodeBuilder: (context, node) {
           if (node.data is Tag) {
             return TagExt.render(node.data as Tag, context, didChangeState);
-          } else {
+          } else if (node.data is ArrayEntry) {
+            ArrayEntry entry = node.data as ArrayEntry;
             return ListTile(
-              title: Text(node.label),
+              title: Text(entry.value),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Delete entry
+                  ElevatedButton(
+                      onPressed: () {
+                        if (entry.parent is ByteArrayTag) {
+                          ByteArrayTag bat = entry.parent as ByteArrayTag;
+                          bat.value.removeAt(entry.index);
+                        }
+                        if (entry.parent is IntArrayTag) {
+                          IntArrayTag iat = entry.parent as IntArrayTag;
+                          iat.value.removeAt(entry.index);
+                        }
+                        if (entry.parent is LongArrayTag) {
+                          LongArrayTag lat = entry.parent as LongArrayTag;
+                          lat.value.removeAt(entry.index);
+                        }
+
+                        didChangeState();
+                      },
+                      child: Icon(Icons.delete_forever))
+                ],
+              ),
             );
+          } else {
+            return ListTile(title: Text(node.label));
           }
         },
         controller: controller,

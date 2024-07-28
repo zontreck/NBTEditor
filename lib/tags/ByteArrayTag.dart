@@ -3,12 +3,17 @@ import 'package:flutter_treeview/src/models/node.dart';
 import 'package:libac_dart/nbt/impl/ByteArrayTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
 
+import 'ArrayEntry.dart';
+
 extension ByteArrayTagExt on ByteArrayTag {
   Node getNode(String path) {
     List<Node> entries = [];
     int count = 0;
     for (var element in value) {
-      entries.add(Node(key: "$path/$count", label: "$element", data: element));
+      entries.add(Node(
+          key: "$path/$count",
+          label: "$element",
+          data: ArrayEntry(value: "${element}", parent: this, index: count)));
       count++;
     }
 
