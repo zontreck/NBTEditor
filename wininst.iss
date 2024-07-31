@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "NBT Editor"
-#define MyAppVersion "1.0727.24+1730"
+#define MyAppVersion "1.0731.24+0608"
 #define MyAppPublisher "Piccari Creations"
 #define MyAppURL "https://zontreck.com"
 #define MyAppExeName "nbteditor.exe"
