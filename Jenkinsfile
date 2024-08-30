@@ -38,7 +38,6 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                     archiveArtifacts artifacts: '*.apk', fingerprint: true
-                    archiveArtifacts artifacts: 'out/*', fingerprint: true
                     archiveArtifacts artifacts: '*.AppImage', fingerprint: true
                     archiveArtifacts artifacts: '*.zsync', fingerprint: true
 
@@ -57,9 +56,6 @@ pipeline {
                     bat 'flutter pub get'
                     bat 'flutter build windows'
 
-                    bat 'dart compile exe -o out\\snbt2nbt.exe bin\\snbt2nbt.dart'
-                    bat 'dart compile exe -o out\\nbt2snbt.exe bin\\nbt2snbt.dart'
-
                     dir("build\\windows\\x64\\runner\\Release") {
                         bat 'tar -cvf ..\\..\\..\\..\\..\\windows.tgz .'
                     }
@@ -69,7 +65,6 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'out\\*', fingerprint: true
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
 
                     deleteDir()
