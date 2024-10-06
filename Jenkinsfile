@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage("Build on Linux") {
             agent {
-                label 'linux'
+                label 'flutter'
             }
             steps {
                 script {
