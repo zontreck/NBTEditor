@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_highlight/themes/vs.dart';
@@ -5,6 +6,7 @@ import 'package:libac_dart/nbt/SnbtIo.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/SessionData.dart';
+import 'package:nbteditor/pages/EditValue.dart';
 
 class SnbtEdit extends StatefulWidget {
   const SnbtEdit({super.key});
@@ -31,6 +33,19 @@ class SnbtState extends State<SnbtEdit> {
       appBar: AppBar(
         title: const Text("SNBT Editor"),
         backgroundColor: Constants.TITLEBAR_COLOR,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                var searchResponse = await showCupertinoDialog(
+                    context: context,
+                    builder: (searchBuilder) {
+                      return InputPrompt(
+                          titleText: "Search",
+                          PromptText: "What do you want to search for?");
+                    });
+              },
+              icon: Icon(CupertinoIcons.search))
+        ],
       ),
       floatingActionButton: ElevatedButton(
         onPressed: () async {

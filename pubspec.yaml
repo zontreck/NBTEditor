@@ -1,7 +1,7 @@
 name: nbteditor
 description: A Minecraft NBT Editor written in Flutter
 publish_to: "none"
-version: 1.1.012225+0420
+version: 1.1.012325+1215
 
 environment:
   sdk: ^3.6.1

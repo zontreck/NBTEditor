@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 import 'package:libac_dart/nbt/NbtIo.dart';
@@ -14,6 +15,7 @@ import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/main.dart';
+import 'package:nbteditor/pages/EditValue.dart';
 import 'package:nbteditor/tags/ArrayEntry.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
@@ -67,6 +69,21 @@ class EditorState extends State<Editor> {
       appBar: AppBar(
         backgroundColor: Constants.TITLEBAR_COLOR,
         title: Text("Named Binary Tag Editor${appendCompressed()}"),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                // Show input prompt
+                var searchResponse = await showCupertinoDialog(
+                    context: context,
+                    builder: (dialogBuilder) {
+                      return InputPrompt(
+                          titleText: "What tag name to search for?",
+                          PromptText:
+                              "Enter the tag name you want to search for");
+                    });
+              },
+              icon: const Icon(CupertinoIcons.search_circle))
+        ],
       ),
       drawer: Drawer(
         backgroundColor: Constants.DRAWER_COLOR,

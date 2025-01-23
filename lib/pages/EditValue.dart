@@ -2,6 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:libac_dart/nbt/Tag.dart';
 import 'package:libac_dart/nbt/impl/StringTag.dart';
 
+class InputPrompt extends StatefulWidget {
+  String titleText;
+  String PromptText;
+  String value;
+  InputPrompt(
+      {required this.titleText,
+      required this.PromptText,
+      super.key,
+      this.value = ""});
+
+  @override
+  State<StatefulWidget> createState() {
+    return InputPromptState(
+        title: Text(titleText), prompt: Text(PromptText), value: value);
+  }
+}
+
+class InputPromptState extends State<InputPrompt> {
+  final Widget title;
+  final Widget prompt;
+  TextEditingController _editor = TextEditingController();
+
+  InputPromptState({required this.title, required this.prompt, String? value}) {
+    if (value != null) _editor.text = value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        title: title,
+        actions: [
+          ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context, _editor.text);
+              },
+              child: Text("Confirm")),
+          ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context, "");
+              },
+              child: Text("Cancel"))
+        ],
+        content: SizedBox(
+          width: 200,
+          height: 100,
+          child: Column(children: [
+            prompt,
+            TextField(
+              controller: _editor,
+            )
+          ]),
+        ));
+  }
+}
+
 class EditValuePrompt extends StatefulWidget {
   const EditValuePrompt({super.key});
 
