@@ -2,6 +2,10 @@
 
 A fully featured NBT Editor
 
+![NBT Editor Logo](android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png "NBT Editor Logo")
+
+![App](appshowcase_012425.png "NBT Editor GUI")
+
 ## Features
 
 - NBT
