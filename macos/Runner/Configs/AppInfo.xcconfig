@@ -8,7 +8,7 @@
 PRODUCT_NAME = nbteditor
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.nbteditor
+PRODUCT_BUNDLE_IDENTIFIER = com.zontreck.nbteditor
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 Piccari Creations. All rights reserved.
