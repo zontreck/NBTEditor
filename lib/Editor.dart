@@ -109,7 +109,8 @@ class EditorState extends State<Editor> {
           ListTile(
             title: const Text("O P E N"),
             leading: const Icon(Icons.folder),
-            subtitle: const Text("Open an existing NBT Document for editing"),
+            subtitle:
+                const Text("Open an existing NBT/SNBT Document for editing"),
             onTap: () async {
               if (await needsPermissionsPage()) {
                 Navigator.pushNamed(context, "/perms");
@@ -130,7 +131,11 @@ class EditorState extends State<Editor> {
                 return;
               } else {
                 // String!!
-                CompoundTag ct = await NbtIo.read(filePath);
+                CompoundTag ct = CompoundTag();
+                if (filePath.endsWith(".txt") || filePath.endsWith(".snbt")) {
+                  ct = await SnbtIo.readFromFile(filePath) as CompoundTag;
+                } else
+                  CompoundTag ct = await NbtIo.read(filePath);
 
                 SessionData.ROOT_TAG = ct;
               }
