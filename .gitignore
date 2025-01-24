@@ -29,6 +29,7 @@ doc/api/
 out
 .idea
 *.iml
+.vscode
 
 AppDir
 appimage-build
