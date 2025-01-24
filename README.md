@@ -21,6 +21,10 @@ The following is the build instructions for this project.
 
 1. Install Flutter and add it to your path.
 2. Run the command: `flutter build windows`
+3. (OPTIONAL) Installer - skip if not desired
+4. To build the installer you will need Inno Setup installed.
+5. Add the path you installed IS to your path.
+6. Run compile.bat to both build and generate the setup file which will be placed into the out folder.
 
 # MacOS
 
