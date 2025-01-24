@@ -14,9 +14,9 @@ pipeline {
                 script {
                     sh '''
                     #!/bin/bash
+                    cat /key.properties >android/key.properties
 
                     flutter doctor
-
                     flutter pub get
                     chmod +x compile.sh
                     ./compile.sh
@@ -30,7 +30,7 @@ pipeline {
 
                     cd ../../../../
 
-                    # appimage-builder --recipe AppImageBuilder.yml
+                    #appimage-builder --recipe AppImageBuilder.yml
 
                     #appimagetool AppDir/*.desktop -u "zsync|https://ci.zontreck.com/job/Projects/job/Dart/job/NBTEditor/job/main/lastSuccessfulBuild/artifact/NBT%20Editor-latest-x86_64.AppImage.zsync"
                     '''
