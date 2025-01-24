@@ -40,10 +40,10 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                     archiveArtifacts artifacts: '*.apk', fingerprint: true
-                    archiveArtifacts artifacts: '*.AppImage', fingerprint: true
-                    archiveArtifacts artifacts: '*.zsync', fingerprint: true
+                    //archiveArtifacts artifacts: '*.AppImage', fingerprint: true
+                    //archiveArtifacts artifacts: '*.zsync', fingerprint: true
 
-                    deleteDir()
+                    cleanWs()
                 }
             }
         }
