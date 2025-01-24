@@ -46,30 +46,5 @@ pipeline {
             }
         }
 
-        stage('Build on Windows') {
-            agent {
-                label 'windows'
-            }
-            steps {
-                script {
-                    bat 'del out\\.placeholder'
-                    bat 'flutter pub get'
-                    bat 'flutter build windows'
-
-                    dir("build\\windows\\x64\\runner\\Release") {
-                        bat 'tar -cvf ..\\..\\..\\..\\..\\windows.tgz .'
-                    }
-
-                    bat 'iscc wininst.iss'
-                }
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: '*.tgz', fingerprint: true
-
-                    deleteDir()
-                }
-            }
-        }
     }
 }
