@@ -15,6 +15,8 @@ pipeline {
                     sh '''
                     #!/bin/bash
 
+                    flutter doctor
+
                     flutter pub get
                     chmod +x compile.sh
                     ./compile.sh
