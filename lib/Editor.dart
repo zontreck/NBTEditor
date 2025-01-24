@@ -135,7 +135,7 @@ class EditorState extends State<Editor> {
                 if (filePath.endsWith(".txt") || filePath.endsWith(".snbt")) {
                   ct = await SnbtIo.readFromFile(filePath) as CompoundTag;
                 } else
-                  CompoundTag ct = await NbtIo.read(filePath);
+                  ct = await NbtIo.read(filePath);
 
                 SessionData.ROOT_TAG = ct;
               }
