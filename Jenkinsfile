@@ -33,6 +33,8 @@ pipeline {
                     #appimage-builder --recipe AppImageBuilder.yml
 
                     #appimagetool AppDir/*.desktop -u "zsync|https://ci.zontreck.com/job/Projects/job/Dart/job/NBTEditor/job/main/lastSuccessfulBuild/artifact/NBT%20Editor-latest-x86_64.AppImage.zsync"
+
+                    mv out/nbteditor-cli nbteditor-cli-linux-x64
                     '''
                 }
             }
@@ -40,6 +42,7 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: '*.tgz', fingerprint: true
                     archiveArtifacts artifacts: '*.apk', fingerprint: true
+                    archiveArtifacts artifacts: "nbteditor-cli-linux-x64", fingerprint: true
                     //archiveArtifacts artifacts: '*.AppImage', fingerprint: true
                     //archiveArtifacts artifacts: '*.zsync', fingerprint: true
 
