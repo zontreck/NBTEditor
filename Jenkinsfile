@@ -50,6 +50,33 @@ pipeline {
                 }
             }
         }
+        stage("Build on Windows") {
+            agent {
+                label "windows"
+            }
+            steps {
+                script {
+                    bat 'del out\\.placeholder'
+                    bat 'flutter pub get'
+                    bat 'flutter build windows'
+                    dir("build\\windows\\x64\\runner\\Release") {
+                        bat 'tar -cvf ..\\..\\..\\..\\..\\windows.tgz .'
+                    }
+                    bat 'dart compile exe -o out\\nbteditor-cli.exe cli\\nbtcli.dart'
+                    bat 'iscc wininst.iss'
 
+                }
+            }
+
+            post {
+                always {
+                    archiveArtifacts artifacts: "windows.tgz"
+                    archiveArtifacts artifacts: "out\\NBTEditor-setup.exe"
+                    archiveArtifacts artifacts: "out\\nbteditor-cli.exe"
+
+                    cleanWs()
+                }
+            }
+        }
     }
 }
