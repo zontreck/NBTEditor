@@ -4,6 +4,7 @@ import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_highlight/themes/vs.dart';
 import 'package:libac_dart/nbt/SnbtIo.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
+import 'package:libacflutter/Prompt.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/pages/EditValue.dart';
@@ -40,8 +41,9 @@ class SnbtState extends State<SnbtEdit> {
                     context: context,
                     builder: (searchBuilder) {
                       return InputPrompt(
-                          titleText: "Search",
-                          PromptText: "What do you want to search for?");
+                          title: "Search",
+                          prompt: "What do you want to search for?",
+                          type: InputPromptType.Text);
                     });
               },
               icon: Icon(CupertinoIcons.search))

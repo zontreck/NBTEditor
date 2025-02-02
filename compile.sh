@@ -2,6 +2,7 @@
 
 flutter build linux
 flutter build apk
+flutter build web
 
 if [ ! -d out ]
 then

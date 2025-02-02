@@ -11,6 +11,7 @@ import 'package:libac_dart/nbt/impl/ByteArrayTag.dart';
 import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:libac_dart/nbt/impl/IntArrayTag.dart';
 import 'package:libac_dart/nbt/impl/LongArrayTag.dart';
+import 'package:libacflutter/Prompt.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
@@ -77,9 +78,10 @@ class EditorState extends State<Editor> {
                     context: context,
                     builder: (dialogBuilder) {
                       return InputPrompt(
-                          titleText: "What tag name to search for?",
-                          PromptText:
-                              "Enter the tag name you want to search for");
+                          title: "What tag name to search for?",
+                          prompt:
+                              "Enter the tag name or value you want to search for",
+                          type: InputPromptType.Text);
                     });
               },
               icon: const Icon(CupertinoIcons.search_circle))
