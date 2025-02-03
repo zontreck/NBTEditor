@@ -137,9 +137,11 @@ class EditorState extends State<Editor> {
                 // String!!
                 CompoundTag ct = CompoundTag();
                 if (filePath.endsWith(".txt") || filePath.endsWith(".snbt")) {
-                  ct = await SnbtIo.readFromFile(filePath) as CompoundTag;
+                  var strData = await result!.readAsString();
+                  ct = await SnbtIo.readFromString(strData) as CompoundTag;
                 } else {
-                  ct = await NbtIo.read(filePath);
+                  var data = await result!.readAsBytes();
+                  ct = await NbtIo.readFromStream(data) as CompoundTag;
                 }
 
                 SessionData.ROOT_TAG = ct;
