@@ -12,7 +12,7 @@ Future<int> main(List<String> args) async {
   if (parsed.hasArg("help") || parsed.count == 0) {
     // Print help information
     print(
-        "NBT Editor Command Line Interface\nCopyright 2025 Piccari Creations\nLicensed under the GPL\nVersion: ${VERSION}\n\n");
+        "NBT Editor Command Line Interface\nCopyright 2025 Piccari Creations\nLicensed under the GPL\nVersion: $VERSION\n\n");
 
     var defaults = ArgumentsBuilder.builder()
         .withArgument(BoolArgument(name: "help", value: null))

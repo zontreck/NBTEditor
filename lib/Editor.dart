@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
@@ -16,7 +16,6 @@ import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/Consts2.dart';
 import 'package:nbteditor/SessionData.dart';
 import 'package:nbteditor/main.dart';
-import 'package:nbteditor/pages/EditValue.dart';
 import 'package:nbteditor/tags/ArrayEntry.dart';
 import 'package:nbteditor/tags/CompoundTag.dart';
 import 'package:nbteditor/tags/Tag.dart';
@@ -118,12 +117,15 @@ class EditorState extends State<Editor> {
                 Navigator.pushNamed(context, "/perms");
                 return;
               }
+              XTypeGroup typeGroup = const XTypeGroup(
+                  label: 'NBT', extensions: <String>["nbt", "snbt", "dat"]);
+              var result =
+                  await openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]);
               String? filePath;
-              var result = await FilePicker.platform.pickFiles();
               if (result != null) {
                 // Do something with the selected file path
                 print('Selected file path: $filePath');
-                filePath = result.files.first.path;
+                filePath = result.path;
               } else {
                 // User canceled the picker
                 print('File selection canceled.');
@@ -136,8 +138,9 @@ class EditorState extends State<Editor> {
                 CompoundTag ct = CompoundTag();
                 if (filePath.endsWith(".txt") || filePath.endsWith(".snbt")) {
                   ct = await SnbtIo.readFromFile(filePath) as CompoundTag;
-                } else
+                } else {
                   ct = await NbtIo.read(filePath);
+                }
 
                 SessionData.ROOT_TAG = ct;
               }
@@ -190,11 +193,11 @@ class EditorState extends State<Editor> {
 
               // Prompt for where to save
               print("Begin picking file to save to");
-              var FSL = await FilePicker.platform.saveFile(bytes: Uint8List(0));
+              var FSL = await getSaveLocation();
               String? filePath;
 
               if (FSL != null) {
-                filePath = FSL;
+                filePath = FSL.path;
               }
 
               if (filePath == null) {
@@ -203,12 +206,15 @@ class EditorState extends State<Editor> {
               }
               print(filePath);
               CompoundTag tag = controller.children[0].data as CompoundTag;
+              Uint8List data = Uint8List(0);
               if (result == null) {
                 // Save uncompressed
-                NbtIo.write(filePath, tag);
+                data = await NbtIo.writeToStream(tag);
               } else {
-                NbtIo.writeCompressed(filePath, tag);
+                data = await NbtIo.writeToStreamCompressed(tag);
               }
+              var dataFile = XFile.fromData(data);
+              await dataFile.saveTo(filePath);
             },
           ),
           ListTile(
@@ -224,11 +230,11 @@ class EditorState extends State<Editor> {
               }
               // Prompt for where to save
               print("Begin picking file to save to");
-              var FSL = await FilePicker.platform.saveFile(bytes: Uint8List(0));
+              var FSL = await getSaveLocation();
               String? filePath;
 
               if (FSL != null) {
-                filePath = FSL;
+                filePath = FSL.path;
               }
 
               if (filePath == null) {
@@ -236,9 +242,13 @@ class EditorState extends State<Editor> {
                 return;
               }
               print(filePath);
+              Uint8List data = Uint8List(0);
 
-              SnbtIo.writeToFile(
-                  filePath, controller.children[0].data as CompoundTag);
+              String str = SnbtIo.writeToString(
+                  controller.children[0].data as CompoundTag);
+
+              var dataFile = XFile.fromData(Uint8List.fromList(str.codeUnits));
+              await dataFile.saveTo(filePath);
             },
           )
         ]),

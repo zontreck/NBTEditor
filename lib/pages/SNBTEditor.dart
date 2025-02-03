@@ -7,7 +7,6 @@ import 'package:libac_dart/nbt/impl/CompoundTag.dart';
 import 'package:libacflutter/Prompt.dart';
 import 'package:nbteditor/Constants.dart';
 import 'package:nbteditor/SessionData.dart';
-import 'package:nbteditor/pages/EditValue.dart';
 
 class SnbtEdit extends StatefulWidget {
   const SnbtEdit({super.key});
@@ -46,7 +45,7 @@ class SnbtState extends State<SnbtEdit> {
                           type: InputPromptType.Text);
                     });
               },
-              icon: Icon(CupertinoIcons.search))
+              icon: const Icon(CupertinoIcons.search))
         ],
       ),
       floatingActionButton: ElevatedButton(

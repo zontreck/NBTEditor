@@ -29,6 +29,7 @@ The following is the build instructions for this project.
 4. To build the installer you will need Inno Setup installed.
 5. Add the path you installed IS to your path.
 6. Run compile.bat to both build and generate the setup file which will be placed into the out folder.
+7. Enable Developer Mode if you wish to run the output
 
 # MacOS
 
@@ -36,6 +37,6 @@ The following is the build instructions for this project.
 2. Install XCode
 3. Install any necessary command line developer tools from XCode
 4. Developer mode?
-5. Run the command? `flutter build mac` or `flutter build macos`
+5. Run the command `flutter build macos`
 
 **Testing needed** I do not own a Mac, testing by a Mac user will be required.
