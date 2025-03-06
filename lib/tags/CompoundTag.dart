@@ -8,7 +8,9 @@ extension CompoundTagExt on CompoundTag {
     return ListTile(
       title: Text("TAG_Compound (${getKey()})"),
       subtitle: TagExt.getElementDescriptor(
-        "${value.length} tag${value.length > 1 ? "s" : ""}",
+        value.length == 0
+            ? "No Tags"
+            : ("${value.length} tag${value.length > 1 ? "s" : ""}"),
       ),
       leading: TagExt.getTagIcon(getTagType()),
       trailing: TagExt.getElementButtons(
